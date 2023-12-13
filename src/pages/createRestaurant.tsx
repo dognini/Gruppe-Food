@@ -7,9 +7,9 @@ import Button from "../components/form/button";
 import Select from "../components/form/select";
 import ReturnArrow from "../layout/returnArrow";
 import InputLabel from "../components/form/input";
+import InputFile from "../components/form/inputFile";
 import RestaurantesProps from "../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../interfaces/typesRestaurantsProps";
-import InputFile from "../components/form/inputFile";
 
 export default function CreateRestaurant() {
 
@@ -91,25 +91,7 @@ export default function CreateRestaurant() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const updateRestaurante = {
-            nome: restaurante.nome,
-            cnpj: restaurante.cnpj,
-            tipo: restaurante.tipo,
-            frete: restaurante.frete,
-            deliveryTime: restaurante.deliveryTime,
-            imagem: restaurante.imagem,
-            pratos: [],
-            endereco: {
-                cep: restaurante.endereco.cep,
-                cidade: restaurante.endereco.cidade,
-                estado: restaurante.endereco.estado,
-                rua: restaurante.endereco.rua,
-                numero: restaurante.endereco.numero,
-                complemento: restaurante.endereco.complemento
-            }
-        }
-
-        axios.post("http://localhost:5000/restaurantes", updateRestaurante)
+        axios.post("http://localhost:5000/restaurantes", restaurante)
             .then((res) => {
                 console.log("Retaurante Cadastrado: ", res.data)
             })

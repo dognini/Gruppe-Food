@@ -1,7 +1,8 @@
 import "../styles/pages/login.css";
 
+
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import Input from "../components/form/input";
@@ -11,8 +12,8 @@ import UsersProps from "../interfaces/usersProps";
 export default function Login() {
     const navigate = useNavigate();
 
+    const [user, setUser] = useState<Partial<UsersProps>>({});
     const [users, setUsers] = useState<UsersProps[]>([]);
-    const [user, setUser] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:5000/usuarios")
@@ -33,7 +34,16 @@ export default function Login() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log("teste")
+        const filterUser = users.find((u) => u.email === user.email && u.senha === user.senha);
+
+        if (filterUser) {
+            localStorage.setItem("usuario", JSON.stringify(filterUser))
+            alert("Login feito com sucesso!!");
+            navigate('/');
+        } else {
+            alert("E-mail ou senha errados");
+        }
+
     }
 
     return (

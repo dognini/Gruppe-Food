@@ -1,0 +1,22 @@
+input[type="file"] {
+    display: none;
+}
+
+.input_file {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 20%;
+    height: 2em;
+    margin: .5em;
+    border-radius: 2px;
+    background-color: #ffac06;
+}
+
+.input_file label {
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}

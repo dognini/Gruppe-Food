@@ -1,0 +1,22 @@
+.nav_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    margin-top: 3em;
+}
+
+.nav_bar span {
+    padding: .5em;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #ffac06;
+    transition: 0.5s;
+}
+
+.nav_bar span:hover {
+    cursor: pointer;
+    color: #ffac06;
+    background-color: #333;
+}

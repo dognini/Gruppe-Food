@@ -1,0 +1,38 @@
+.header-create-rest {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 94%;
+}
+
+.header-create-rest div {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.header-create-rest div h1 {
+    font-size: 2em;
+}
+
+.form-rest {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 88%;
+    margin-left: 5em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.form-rest main {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5em;
+    margin: 1em;
+}
+
+.form-rest main div {
+    display: flex;
+    flex-direction: column;
+}

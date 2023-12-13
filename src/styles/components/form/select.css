@@ -1,0 +1,12 @@
+.select {
+    display: flex;
+    flex-direction: column;
+}
+
+.select label {
+    margin-bottom: 5px;
+}
+
+.select {
+    width: 15em;
+}

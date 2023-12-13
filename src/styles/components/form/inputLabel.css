@@ -1,0 +1,14 @@
+.input_label {
+    display: flex;
+    flex-direction: column;
+}
+
+.input_label label {
+    margin-bottom: 5px;
+}
+
+.input_label input {
+    border: none;
+    border-radius: 3px;
+    height: 1.7em;
+}

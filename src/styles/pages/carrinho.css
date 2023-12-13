@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrinho {
+    width: 88%;
+    height: 100%;
+    margin: 5em 0 5em 0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.carrinho main p {
+    font-size: 20px;
+}
+
+.carrinho header,
+.carrinho main,
+.carrinho footer {
+    margin: 1em;
+}
+
+.carrinho header h1 {
+    font-size: 2em;
+    margin-bottom: 1.5em;
+}
+
+.carrinho footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.carrinho footer button {
+    padding: .5em;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #ffac06;
+    transition: .5s;
+}
+
+.carrinho footer button:hover {
+    color: #ffac06;
+    background-color: #333;
+    cursor: pointer;
+}

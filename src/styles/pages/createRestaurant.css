@@ -36,3 +36,9 @@
     display: flex;
     flex-direction: column;
 }
+
+.form-rest main img {
+    width: 7em;
+    height: 4em;
+    border-radius: 2px;
+}

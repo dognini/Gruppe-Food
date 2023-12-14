@@ -8,7 +8,7 @@
 }
 
 .input_label input {
-    border: none;
+    border: 1px solid lightgray;
     border-radius: 3px;
     height: 1.7em;
 }

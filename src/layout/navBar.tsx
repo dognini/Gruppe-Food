@@ -1,10 +1,22 @@
 import "../styles/layout/NavBar.css";
 
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+import UsersProps from "../interfaces/usersProps";
 
 const NavBar = () => {
+    const [user, setUser] = useState<UsersProps>();
+
+    useEffect(() => {
+
+        const localUSer = localStorage.getItem('usuario');
+        const user = localUSer ? JSON.parse(localUSer) : null;
+
+        setUser(user);
+    }, []);
+
     return (
         <header className="nav_bar_container">
 
@@ -21,17 +33,21 @@ const NavBar = () => {
                     </span>
                 </Link>
 
-                <Link to={'/create-user'}>
-                    <span>
-                        + Usuários
-                    </span>
-                </Link>
+                {user?.typeUser === 'Administrador' &&
+                    <>
+                        <Link to={'/create-user'}>
+                            <span>
+                                + Usuários
+                            </span>
+                        </Link>
 
-                <Link to={'/create-restaurant'}>
-                    <span>
-                        + Restaurante
-                    </span>
-                </Link>
+                        <Link to={'/restaurantes'}>
+                            <span>
+                                + Restaurante
+                            </span>
+                        </Link>
+                    </>
+                }
 
                 <Link to={'/carrinho'}>
                     <button>

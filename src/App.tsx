@@ -5,28 +5,29 @@ import Login from "./pages/login";
 import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
 import CreateUser from "./pages/createUser";
-import { AuthProvider } from "./authContext";
 import RestaurantEdit from "./pages/restaurant";
 import CreateRestaurant from "./pages/createRestaurant";
+import Restaurantes from "./pages/restaurantesList";
+import EditRestaurant from "./pages/editRestaurant";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
+      <Routes>
 
-          <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
 
-          <Route path="/" element={<Container />}>
-            <Route index element={<Home />} />
-            <Route path="/restaurant/:id" element={<RestaurantEdit />} />
-            <Route path="/carrinho" element={<Carrinho />} />
-            <Route path="/create-restaurant" element={<CreateRestaurant />} />
-            <Route path="/create-user" element={<CreateUser />} />
-          </Route>
+        <Route path="/" element={<Container />}>
+          <Route index element={<Home />} />
+          <Route path="/carrinho" element={<Carrinho />} />
+          <Route path="/create-user" element={<CreateUser />} />
+          <Route path="/restaurantes" element={<Restaurantes />} />
+          <Route path="/edit-restaurant/:id" element={<EditRestaurant />} />
+          <Route path="/restaurant/:id" element={<RestaurantEdit />} />
+          <Route path="/create-restaurant" element={<CreateRestaurant />} />
+        </Route>
 
-        </Routes>
-      </AuthProvider>
+      </Routes>
     </BrowserRouter>
   )
 }

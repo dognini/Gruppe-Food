@@ -7,16 +7,17 @@ interface SelectProps {
     name: string
     label: string
     tamanho?: string
+    value?: string
     options: TypesRestaurantsProps[]
     handleOnChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-const Select = ({ label, options, name, tamanho, handleOnChange }: SelectProps) => {
+const Select = ({ label, options, name, tamanho, value, handleOnChange }: SelectProps) => {
     return (
         <div className="select">
             <label> {label} </label>
 
-            <select onChange={handleOnChange} name={name} style={{ width: tamanho }}>
+            <select value={value} onChange={handleOnChange} name={name} style={{ width: tamanho }}>
                 <option key="default" value=""> Selecione um tipo </option>
 
                 {options.map((item, index) => (

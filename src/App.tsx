@@ -4,11 +4,11 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
-import CreateUser from "./pages/createUser";
-import RestaurantEdit from "./pages/restaurant";
-import CreateRestaurant from "./pages/createRestaurant";
-import Restaurantes from "./pages/restaurantesList";
-import EditRestaurant from "./pages/editRestaurant";
+import CreateUser from "./pages/user/createUser";
+import RestaurantEdit from "./pages/restaurant/restaurant";
+import CreateRestaurant from "./pages/restaurant/createRestaurant";
+import Restaurantes from "./pages/restaurant/restaurantesList";
+import EditRestaurant from "./pages/restaurant/editRestaurant";
 
 export default function App() {
   return (

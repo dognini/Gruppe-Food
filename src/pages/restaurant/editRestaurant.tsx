@@ -1,16 +1,16 @@
-import "../styles/pages/createRestaurant.css";
+import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import axios from "axios";
-import Input from "../components/form/input";
-import HeaderList from "../layout/headerList";
-import Button from "../components/form/button";
-import Select from "../components/form/select";
-import InputFile from "../components/form/inputFile";
-import RestaurantesProps from "../interfaces/restaurantesProps";
-import TypesRestaurantsProps from "../interfaces/typesRestaurantsProps";
+import Input from "../../components/form/input";
+import HeaderList from "../../layout/headerList";
+import Button from "../../components/form/button";
+import Select from "../../components/form/select";
+import InputFile from "../../components/form/inputFile";
+import RestaurantesProps from "../../interfaces/restaurantesProps";
+import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 
 
 export default function EditRestaurant() {

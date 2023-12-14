@@ -1,11 +1,11 @@
-import "../styles/pages/restaurantesList.css";
+import "../../styles/pages/restaurant/restaurantesList.css";
 
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import Header from "../layout/header";
-import RestaurantesProps from "../interfaces/restaurantesProps";
-import CardListRestaurantes from "../components/cardListRestaurantes";
+import Header from "../../layout/header";
+import RestaurantesProps from "../../interfaces/restaurantesProps";
+import CardListRestaurantes from "../../components/cardListRestaurantes";
 
 export default function Restaurantes() {
     const [restaurante, setRestaurante] = useState<RestaurantesProps[]>([]);

@@ -1,15 +1,15 @@
-import "../styles/pages/createRestaurant.css";
+import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import Button from "../components/form/button";
-import Select from "../components/form/select";
-import InputLabel from "../components/form/input";
-import InputFile from "../components/form/inputFile";
-import RestaurantesProps from "../interfaces/restaurantesProps";
-import TypesRestaurantsProps from "../interfaces/typesRestaurantsProps";
-import HeaderList from "../layout/headerList";
+import Button from "../../components/form/button";
+import Select from "../../components/form/select";
+import InputLabel from "../../components/form/input";
+import InputFile from "../../components/form/inputFile";
+import RestaurantesProps from "../../interfaces/restaurantesProps";
+import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
+import HeaderList from "../../layout/headerList";
 
 export default function CreateRestaurant() {
 

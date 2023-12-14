@@ -1,14 +1,14 @@
-import "../styles/pages/createuser.css";
+import "../../styles/pages/user/createuser.css";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import Input from "../components/form/input";
-import Select from "../components/form/select";
-import Button from "../components/form/button";
-import UsersProps from "../interfaces/usersProps";
-import TypesUsersProps from "../interfaces/typesUsersProps";
+import Input from "../../components/form/input";
+import Select from "../../components/form/select";
+import Button from "../../components/form/button";
+import UsersProps from "../../interfaces/usersProps";
+import TypesUsersProps from "../../interfaces/typesUsersProps";
 
 export default function CreateUser() {
     const navigate = useNavigate();

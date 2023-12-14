@@ -1,15 +1,15 @@
-import "../styles/pages/restaurant.css";
+import "../../styles/pages/restaurant/restaurant.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
-import Button from "../components/form/button";
-import PratoCard from "../components/cardPratos";
-import FormPratos from "../components/formPratos";
-import HeaderRestaurant from "../layout/headerRestaurant";
-import RestaurantesProps, { PratosProps } from "../interfaces/restaurantesProps";
+import Button from "../../components/form/button";
+import PratoCard from "../../components/cardPratos";
+import FormPratos from "../../components/formPratos";
+import HeaderRestaurant from "../../layout/headerRestaurant";
+import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
 
 export default function RestaurantEdit() {
     const { id } = useParams();

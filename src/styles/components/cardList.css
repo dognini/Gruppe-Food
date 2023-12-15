@@ -1,4 +1,4 @@
-.div-card {
+.container-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -8,29 +8,44 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.div-card img {
+.container-card div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6em;
+    height: 6em;
+    border-radius: 100%;
+    background-color: #ffac06;
+}
+
+.container-card div span {
+    font-size: 3em;
+    color: #fff;
+}
+
+.container-card img {
     height: 7em;
     width: 9em;
     border-radius: 4px;
 }
 
-.div-card p {
+.container-card p {
     font-size: 17px;
     font-weight: bold;
 }
 
-.div-card p span {
+.container-card p span {
     font-size: 16px;
     font-weight: 400;
 }
 
-.div-card section {
+.container-card section {
     display: flex;
     align-items: center;
     gap: 1em;
 }
 
-.div-card section button {
+.container-card section button {
     font-size: 23px;
     cursor: pointer;
     border: none;
@@ -38,10 +53,10 @@
     transition: 0.2s;
 }
 
-.div-card section button:hover {
+.container-card section button:hover {
     color: #ffac06;
 }
 
-.div-card section button a:hover {
+.container-card section button a:hover {
     color: #ffac06;
 }

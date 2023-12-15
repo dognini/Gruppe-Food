@@ -8,6 +8,7 @@ import { PratosProps } from "../interfaces/restaurantesProps";
 export default function Carrinho() {
     const [pedidos, setPedidos] = useState<PratosProps[]>([]);
 
+
     useEffect(() => {
         const getPedido = localStorage.getItem("pratos")
 
@@ -16,6 +17,7 @@ export default function Carrinho() {
         }
 
     }, []);
+
 
     const calcularPrecoTotal = () => {
         if (pedidos.length > 0) {
@@ -32,6 +34,7 @@ export default function Carrinho() {
         return "0.00";
     }
 
+
     const handleRemove = (index: number) => {
         const updatePedidos = [...pedidos]
         updatePedidos.splice(index, 1);
@@ -40,6 +43,7 @@ export default function Carrinho() {
 
         localStorage.setItem("pratos", JSON.stringify(updatePedidos));
     }
+
 
     const handleUpdateQuantity = (index: number, quantity: number) => {
         const updatePedidos = [...pedidos];
@@ -53,6 +57,7 @@ export default function Carrinho() {
 
         localStorage.setItem("pratos", JSON.stringify(updatePedidos));
     }
+    
 
     return (
         <section className="container">

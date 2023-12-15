@@ -1,4 +1,4 @@
-import "../../styles/pages/restaurant/restaurantesList.css";
+import "../../styles/components/list.css";
 
 import { useEffect, useState } from "react";
 
@@ -7,7 +7,7 @@ import Header from "../../layout/header";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import CardListRestaurantes from "../../components/cardListRestaurantes";
 
-export default function Restaurantes() {
+export default function RestaurantesList() {
     const [restaurante, setRestaurante] = useState<RestaurantesProps[]>([]);
 
     useEffect(() => {
@@ -15,6 +15,20 @@ export default function Restaurantes() {
             .then((res) => setRestaurante(res.data))
             .catch((error) => console.log("Não foi possivel buscar os restaurantes", error));
     }, []);
+
+    const remove = (id: number) => {
+
+        axios.delete(`http://localhost:5000/restaurantes/${id}`)
+            .then(() => {
+                alert("Restaurante deletado com sucesso!")
+                setRestaurante(prevState => prevState.filter(res => res.id !== id))
+            })
+            .catch((error) => {
+                console.error("Não foi possivel deletar o restaurante", error)
+                alert("Não foi possivel deletar o restaurante, tente novamente mais tarde!")
+            })
+
+    }
 
     return (
         <>
@@ -25,13 +39,14 @@ export default function Restaurantes() {
                 btnLink="/create-restaurant"
             />
 
-            <main className="restaurant-container">
+            <main className="list-container">
 
                 {
                     restaurante.map((item) => (
                         <CardListRestaurantes
                             key={item.id}
                             item={item}
+                            remove={remove}
                         />
                     ))
                 }

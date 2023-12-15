@@ -35,7 +35,7 @@ const NavBar = () => {
 
                 {user?.typeUser === 'Administrador' &&
                     <>
-                        <Link to={'/create-user'}>
+                        <Link to={'/usuarios'}>
                             <span>
                                 + Usuários
                             </span>

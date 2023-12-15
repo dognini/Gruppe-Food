@@ -1,4 +1,4 @@
-import "../styles/components/cardListRestaurantes.css";
+import "../styles/components/cardList.css";
 
 import { FaEye } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 
 interface CardListRestaurantesProps {
     item: RestaurantesProps
+    remove: (id: number) => void;
 }
 
-const CardListRestaurantes = ({ item }: CardListRestaurantesProps) => {
+const CardListRestaurantes = ({ item, remove }: CardListRestaurantesProps) => {
     return (
-        <div className="div-card">
+        <div className="container-card">
 
             <img src={item.imagem} alt={`Imagem do restaurante ${item.nome}`} />
 
@@ -21,9 +22,9 @@ const CardListRestaurantes = ({ item }: CardListRestaurantesProps) => {
             <p> Frete: <span> R$: {item.frete},00 </span> </p>
 
             <section>
-                <button> <FaEye /> </button>
+                <button> <Link to={`/view-restaurant/${item.id}`}> <FaEye /> </Link> </button>
                 <button> <Link to={`/edit-restaurant/${item.id}`}> <MdEdit /> </Link> </button>
-                <button> <MdDelete /> </button>
+                <button onClick={() => remove(item.id)} > <MdDelete /> </button>
             </section>
 
         </div>

@@ -22,8 +22,8 @@ const CardCarrinho = ({ dados, onRemove, onUpdateQuantity }: CardCarrinhoProps) 
     return (
         <div className="card-carrinho">
             <img src={`${dados.img}`} />
-            <p> {dados.nome} </p>
-            <p> {dados.preco} </p>
+            <p> Nome: {dados.nome} </p>
+            <p> R$:{dados.preco},00 </p>
 
             <section>
                 <button onClick={onRemove}> <AiFillDelete /> </button>

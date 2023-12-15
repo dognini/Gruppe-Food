@@ -8,12 +8,14 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from "../../components/form/button";
 import PratoCard from "../../components/cardPratos";
 import FormPratos from "../../components/formPratos";
+import UsersProps from "../../interfaces/usersProps";
 import HeaderRestaurant from "../../layout/headerRestaurant";
 import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
 
-export default function RestaurantEdit() {
+export default function Restaurant() {
     const { id } = useParams();
 
+    const [user, setUser] = useState<UsersProps>();
     const [pratos, setPratos] = useState<PratosProps>({
         id: uuidv4(),
         nome: "",
@@ -30,6 +32,15 @@ export default function RestaurantEdit() {
         const carrinho = localStorage.getItem("pratos") || "[]";
 
         setPratosNoCarrinho(JSON.parse(carrinho))
+    }, []);
+
+
+    useEffect(() => {
+
+        const localUSer = localStorage.getItem('usuario');
+        const user = localUSer ? JSON.parse(localUSer) : null;
+
+        setUser(user);
     }, []);
 
 
@@ -119,9 +130,12 @@ export default function RestaurantEdit() {
             <main className="prato_restaurant">
                 <header>
                     <h1>Pratos:</h1>
-                    <Button onclick={onClickShowPrato}>
-                        + Prato
-                    </Button>
+
+                    {user?.typeUser === "Administrador" &&
+                        <Button onclick={onClickShowPrato}>
+                            + Prato
+                        </Button>
+                    }
                 </header>
 
                 {showFormPrato && <FormPratos handleImageChange={handleImageChange} handleInputChange={handleInput} submit={submit} />}

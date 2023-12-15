@@ -5,16 +5,6 @@
     width: 94%;
 }
 
-.header-create-rest div {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-}
-
-.header-create-rest div h1 {
-    font-size: 2em;
-}
-
 .form-rest {
     display: flex;
     flex-wrap: wrap;

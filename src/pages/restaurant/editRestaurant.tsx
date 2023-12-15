@@ -12,7 +12,6 @@ import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 
-
 export default function EditRestaurant() {
     const { id } = useParams();
 
@@ -55,8 +54,8 @@ export default function EditRestaurant() {
     useEffect(() => {
         axios.get(`http://localhost:5000/restaurantes/${id}`)
             .then((res) => setRestaurante(res.data))
-            .catch((error) => console.error("Não foi possivel trazer o restaurante: ", error))
-    }, []);
+            .catch((error) => console.error("Não foi possivel buscar os dados do restaurante: ", error))
+    }, [id]);
 
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
@@ -125,10 +124,7 @@ export default function EditRestaurant() {
         <form onSubmit={submit}>
 
             <header className="header-create-rest">
-                <HeaderList
-                    to="/restaurantes"
-                    titulo="Editar Restaurante"
-                />
+                <HeaderList to="/restaurantes" titulo={`Editar ${restaurante.nome}`} />
 
                 <Button type="submit" > Salvar </Button>
             </header>

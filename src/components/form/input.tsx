@@ -1,9 +1,9 @@
 import "../../styles/components/form/inputLabel.css";
 
 interface InputLabelProps {
-    type: string
+    type?: string
     name: string
-    label: string
+    label?: string
     disable?: boolean
     placeholder?: string
     tamanho?: string

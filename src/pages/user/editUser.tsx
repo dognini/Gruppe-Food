@@ -3,7 +3,8 @@ import "../../styles/pages/user/createuser.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import axios from "axios";
+import api from "../../api/api";
+
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Button from "../../components/form/button";
@@ -28,14 +29,14 @@ export default function EditUSer() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:5000/TiposUsuarios")
+        api.get("/TiposUsuarios")
             .then((res) => setTypesUser(res.data))
             .catch((error) => console.error("Não foi possivel buscar os tipos de usuários", error))
     }, []);
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/usuarios/${id}`)
+        api.get(`/usuarios/${id}`)
             .then((res) => setUser(res.data))
             .catch((error) => console.error("Não foi possivel buscar os dados do usuário", error))
     }, [id]);
@@ -61,7 +62,7 @@ export default function EditUSer() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        axios.patch(`http://localhost:5000/usuarios/${id}`, user)
+        api.patch(`/usuarios/${id}`, user)
             .then(() => {
                 alert("Usuário cadastrado com sucesso!")
                 navigate("/usuarios");

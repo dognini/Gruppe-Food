@@ -3,12 +3,13 @@ import "../../styles/pages/user/createuser.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 
-import axios from "axios";
+import api from "../../api/api";
+
+import Input from "../../components/form/input";
+import HeaderList from "../../layout/headerList";
+import Select from "../../components/form/select";
 import UsersProps from "../../interfaces/usersProps";
 import TypesUsersProps from "../../interfaces/typesUsersProps";
-import HeaderList from "../../layout/headerList";
-import Input from "../../components/form/input";
-import Select from "../../components/form/select";
 
 export default function VizualizarUser() {
     const { id } = useParams();
@@ -25,14 +26,14 @@ export default function VizualizarUser() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/usuarios/${id}`)
+        api.get(`/usuarios/${id}`)
             .then((res) => setUser(res.data))
             .catch((error) => console.error("Não foi possivel buscar o user", error))
     }, [id]);
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/tiposUsuarios')
+        api.get('/tiposUsuarios')
             .then((res) => setTypeUser(res.data))
             .catch((error) => console.error("Não foi possivel trazer os tipos dos usuários", error))
     }, []);

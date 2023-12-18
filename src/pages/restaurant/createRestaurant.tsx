@@ -2,7 +2,6 @@ import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
 
-import axios from "axios";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
 import InputLabel from "../../components/form/input";
@@ -10,8 +9,11 @@ import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 import HeaderList from "../../layout/headerList";
+import api from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateRestaurant() {
+    const navigate = useNavigate();
 
     const [tipos, setTipos] = useState<TypesRestaurantsProps[]>([]);
     const [restaurante, setRestaurante] = useState<RestaurantesProps>({
@@ -36,10 +38,11 @@ export default function CreateRestaurant() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/TiposRestaurantes')
+        api.get('/TiposRestaurantes')
             .then((res) => setTipos(res.data))
             .catch((error) => console.error("Não foi possivel buscar os tipos dos restaurantes", error));
     }, [])
+
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
         const { value } = event.target;
@@ -95,9 +98,10 @@ export default function CreateRestaurant() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        axios.post("http://localhost:5000/restaurantes", restaurante)
-            .then((res) => {
-                console.log("Retaurante Cadastrado: ", res.data)
+        api.post("/restaurantes", restaurante)
+            .then(() => {
+                alert("Restaurante cadastrado com sucesso!!")
+                navigate('/restaurantes')
             })
             .catch((error) => console.error("Não foi possivel cadastrar o restaurante", error))
     }

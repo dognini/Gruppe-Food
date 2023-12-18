@@ -3,7 +3,8 @@ import "../../styles/pages/user/createuser.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import api from "../../api/api";
+
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Select from "../../components/form/select";
@@ -19,7 +20,7 @@ export default function CreateUser() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:5000/TiposUsuarios")
+        api.get("/TiposUsuarios")
             .then((res) => setTypesUser(res.data))
             .catch((error) => console.log("Não foi possivel buscar os tipos de usuários", error))
     }, []);
@@ -45,7 +46,7 @@ export default function CreateUser() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        axios.post("http://localhost:5000/usuarios", user)
+        api.post("/usuarios", user)
             .then(() => {
                 alert("Usuário cadastrado com sucesso!!")
                 navigate("/usuarios");

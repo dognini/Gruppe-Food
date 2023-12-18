@@ -3,7 +3,8 @@ import "../../styles/pages/restaurant/restaurant.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import axios from "axios";
+import api from "../../api/api";
+
 import { v4 as uuidv4 } from 'uuid';
 import Button from "../../components/form/button";
 import PratoCard from "../../components/cardPratos";
@@ -45,12 +46,12 @@ export default function Restaurant() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/restaurantes/${id}`)
+        api.get(`/restaurantes/${id}`)
             .then((res) => {
                 setRestaurante(res.data)
             })
             .catch((error) => console.log("Algo deu errado", error))
-    }, []);
+    }, [id]);
 
 
     const addLocation = (id: string) => {
@@ -111,7 +112,7 @@ export default function Restaurant() {
             ],
         };
 
-        axios.patch(`http://localhost:5000/restaurantes/${id}`, updateRestaurante)
+        api.patch(`/restaurantes/${id}`, updateRestaurante)
             .then((res) => {
                 setRestaurante(res.data)
                 setShowFormPrato(prevState => !prevState)

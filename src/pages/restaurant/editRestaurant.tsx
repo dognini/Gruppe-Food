@@ -3,7 +3,8 @@ import "../../styles/pages/restaurant/createRestaurant.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import axios from "axios";
+import api from "../../api/api";
+
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Button from "../../components/form/button";
@@ -45,14 +46,14 @@ export default function EditRestaurant() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/TiposRestaurantes')
+        api.get('/TiposRestaurantes')
             .then((res) => setTipos(res.data))
             .catch((error) => console.error("Não foi possivel buscar os tipos dos restaurantes", error));
     }, [])
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/restaurantes/${id}`)
+        api.get(`/restaurantes/${id}`)
             .then((res) => setRestaurante(res.data))
             .catch((error) => console.error("Não foi possivel buscar os dados do restaurante: ", error))
     }, [id]);
@@ -112,7 +113,7 @@ export default function EditRestaurant() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        axios.patch(`http://localhost:5000/restaurantes/${id}`, restaurante)
+        api.patch(`/restaurantes/${id}`, restaurante)
             .then((res) => {
                 console.log("Retaurante Cadastrado: ", res.data)
             })

@@ -2,9 +2,9 @@ import "../styles/pages/login.css";
 
 
 import { useEffect, useState } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import api from "../api/api";
 import Input from "../components/form/input";
 import Button from "../components/form/button";
 import UsersProps from "../interfaces/usersProps";
@@ -16,7 +16,7 @@ export default function Login() {
     const [users, setUsers] = useState<UsersProps[]>([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/usuarios")
+        api.get("/usuarios")
             .then((res) => {
                 setUsers(res.data);
             })
@@ -38,7 +38,9 @@ export default function Login() {
 
         if (filterUser) {
             localStorage.setItem("usuario", JSON.stringify(filterUser))
+
             alert("Login feito com sucesso!!");
+
             navigate('/');
         } else {
             alert("E-mail ou senha errados");

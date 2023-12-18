@@ -2,15 +2,20 @@ import "../styles/layout/navBarRestaurantes.css";
 
 import { useEffect, useState } from "react";
 
-import axios from "axios";
+import api from "../api/api";
 import TypesRestaurantsProps from "../interfaces/typesRestaurantsProps";
 
-const NavBarRestaurantes = () => {
+interface NavBarRestaurantesProps {
+    handle: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+const NavBarRestaurantes = ({ handle }: NavBarRestaurantesProps) => {
+
     const [types, setTypes] = useState<TypesRestaurantsProps[]>([]);
 
     useEffect(() => {
 
-        axios.get('http://localhost:5000/TiposRestaurantes')
+        api.get('/TiposRestaurantes')
             .then((res) => {
                 setTypes(res.data)
             })
@@ -20,9 +25,10 @@ const NavBarRestaurantes = () => {
 
     return (
         <section className="nav_bar">
+            <button value="Todos" type="button" onClick={(e) => handle(e)}> Todos </button>
             {
                 types?.map((item) => (
-                    <span key={item.id}> {item?.nome} </span>
+                    <button value={item?.nome} type="button" onClick={(e) => handle(e)} key={item.id}> {item?.nome} </button>
                 ))
             }
         </section>

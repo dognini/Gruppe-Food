@@ -1,3 +1,7 @@
+import { useParams } from "react-router-dom";
+
+import api from "../../api/api";
+
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Select from "../../components/form/select";
@@ -5,8 +9,7 @@ import InputFile from "../../components/form/inputFile";
 import { useEffect, useState } from "react";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+
 
 export default function ViewRestaurant() {
     const { id } = useParams();
@@ -33,13 +36,13 @@ export default function ViewRestaurant() {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/restaurantes/${id}`)
+        api.get(`/restaurantes/${id}`)
             .then((res) => setRestaurante(res.data))
             .catch((error) => console.error("Não foi possivel buscar os dados do restaurante", error))
     }, [id]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/TiposRestaurantes`)
+        api.get(`/TiposRestaurantes`)
             .then((res) => setTipos(res.data))
             .catch((error) => console.error("Não foi possivel buscar os tipos de restaurantes", error))
     }, []);

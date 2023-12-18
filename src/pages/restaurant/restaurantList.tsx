@@ -2,23 +2,26 @@ import "../../styles/components/list.css";
 
 import { useEffect, useState } from "react";
 
-import axios from "axios";
+import api from "../../api/api";
 import Header from "../../layout/header";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import CardListRestaurantes from "../../components/cardListRestaurantes";
 
-export default function RestaurantesList() {
+export default function RestaurantList() {
+
+    const [searchValue, setSearchValue] = useState("");
     const [restaurante, setRestaurante] = useState<RestaurantesProps[]>([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/restaurantes")
+        api.get("/restaurantes")
             .then((res) => setRestaurante(res.data))
             .catch((error) => console.log("Não foi possivel buscar os restaurantes", error));
     }, []);
 
+
     const remove = (id: number) => {
 
-        axios.delete(`http://localhost:5000/restaurantes/${id}`)
+        api.delete(`/restaurantes/${id}`)
             .then(() => {
                 alert("Restaurante deletado com sucesso!")
                 setRestaurante(prevState => prevState.filter(res => res.id !== id))
@@ -30,6 +33,21 @@ export default function RestaurantesList() {
 
     }
 
+
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+
+        setSearchValue(value);
+    }
+
+    useEffect(() => {
+        api.get(`/restaurantes?q=${searchValue}`)
+            .then((res) => setRestaurante(res.data))
+            .catch((error) => console.error("Error ao pesquisar restaurante: ", error))
+
+    }, [searchValue])
+
+
     return (
         <>
             <Header
@@ -37,6 +55,8 @@ export default function RestaurantesList() {
                 titulo="Restaurantes"
                 labelBTN="Cadastrar"
                 btnLink="/create-restaurant"
+                placeHolderBTN="Pesquisar Restaurante"
+                handleChange={(e) => handleInput(e)}
             />
 
             <main className="list-container">

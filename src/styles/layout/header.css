@@ -16,3 +16,9 @@
 .header div h1 {
     font-size: 2em;
 }
+
+.header div input {
+    width: 15em;
+    border-radius: 2px;
+    border: 1px solid lightgray;
+}

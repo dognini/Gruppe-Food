@@ -13,7 +13,7 @@ import Restaurant from "./pages/restaurant/restaurant";
 import VizualizarUser from "./pages/user/vizualizarUser";
 import EditRestaurant from "./pages/restaurant/editRestaurant";
 import CreateRestaurant from "./pages/restaurant/createRestaurant";
-import RestaurantesList from "./pages/restaurant/restaurantesList";
+import RestaurantesList from "./pages/restaurant/restaurantList";
 import ViewRestaurant from "./pages/restaurant/viewRestaurant";
 
 export default function App() {

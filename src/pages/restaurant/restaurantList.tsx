@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import api from "../../api/api";
 import Header from "../../layout/header";
+import { toast, ToastContainer } from "react-toastify";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import CardListRestaurantes from "../../components/cardListRestaurantes";
 
@@ -15,7 +16,7 @@ export default function RestaurantList() {
     useEffect(() => {
         api.get("/restaurantes")
             .then((res) => setRestaurante(res.data))
-            .catch((error) => console.log("Não foi possivel buscar os restaurantes", error));
+            .catch((error) => console.log("Não foi possível buscar os restaurantes", error));
     }, []);
 
 
@@ -23,12 +24,12 @@ export default function RestaurantList() {
 
         api.delete(`/restaurantes/${id}`)
             .then(() => {
-                alert("Restaurante deletado com sucesso!")
+                toast.success("Restaurante deletado com sucesso!")
                 setRestaurante(prevState => prevState.filter(res => res.id !== id))
             })
             .catch((error) => {
-                console.error("Não foi possivel deletar o restaurante", error)
-                alert("Não foi possivel deletar o restaurante, tente novamente mais tarde!")
+                console.error("Não foi possível deletar o restaurante", error)
+                toast.error("Não foi possível deletar o restaurante, tente novamente mais tarde!")
             })
 
     }
@@ -40,6 +41,7 @@ export default function RestaurantList() {
         setSearchValue(value);
     }
 
+
     useEffect(() => {
         api.get(`/restaurantes?q=${searchValue}`)
             .then((res) => setRestaurante(res.data))
@@ -50,6 +52,8 @@ export default function RestaurantList() {
 
     return (
         <>
+            <ToastContainer />
+
             <Header
                 to="/"
                 titulo="Restaurantes"

@@ -1,14 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import api from "../../api/api";
+import apiCEP from "../../api/apiCEP";
 
+import { toast, ToastContainer } from "react-toastify";
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
+import { CEPMask, CNPJMask } from "../../layout/mask";
 import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
@@ -36,8 +40,9 @@ export default function EditRestaurant() {
         }],
         endereco: {
             cep: "",
-            cidade: "",
             estado: "",
+            cidade: "",
+            bairro: "",
             rua: "",
             numero: "",
             complemento: "",
@@ -48,14 +53,14 @@ export default function EditRestaurant() {
     useEffect(() => {
         api.get('/TiposRestaurantes')
             .then((res) => setTipos(res.data))
-            .catch((error) => console.error("Não foi possivel buscar os tipos dos restaurantes", error));
+            .catch((error) => console.error("Não foi possível buscar os tipos dos restaurantes", error));
     }, [])
 
 
     useEffect(() => {
         api.get(`/restaurantes/${id}`)
             .then((res) => setRestaurante(res.data))
-            .catch((error) => console.error("Não foi possivel buscar os dados do restaurante: ", error))
+            .catch((error) => console.error("Não foi possível buscar os dados do restaurante: ", error))
     }, [id]);
 
 
@@ -110,19 +115,54 @@ export default function EditRestaurant() {
     }
 
 
+    const buscaCEP = async () => {
+        const CEP = restaurante.endereco.cep.replace(/\D/g, "");
+
+        if (CEP.length === 8) {
+
+            await apiCEP.get(`/${CEP}/json/`)
+                .then((res) => {
+                    setRestaurante((prevState) => ({
+                        ...prevState,
+                        endereco: {
+                            ...prevState?.endereco,
+                            cep: res?.data?.cep,
+                            estado: res?.data?.uf,
+                            cidade: res?.data?.localidade,
+                            bairro: res?.data?.bairro,
+                            rua: res?.data?.logradouro,
+                            numero: res?.data?.numero,
+                            complemento: res?.data?.complemento,
+                        },
+                    }));
+                })
+                .catch((error) => console.error("Não foi possível buscar os dados do cep", error))
+        }
+    };
+
+
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         api.patch(`/restaurantes/${id}`, restaurante)
-            .then((res) => {
-                console.log("Retaurante Cadastrado: ", res.data)
+            .then(() => {
+                toast.success("Restaurante atualizado com sucesso!!")
             })
-            .catch((error) => console.error("Não foi possivel cadastrar o restaurante", error))
+            .catch((error) => {
+                toast.error("Não foi possível atualizar o restaurante, tente novamente mais tarde")
+                console.error("Não foi possível atualizar o restaurante", error)
+            })
     }
+
+
+    useEffect(() => {
+        buscaCEP();
+    }, [restaurante.endereco.cep])
 
 
     return (
         <form onSubmit={submit}>
+            <ToastContainer />
 
             <header className="header-create-rest">
                 <HeaderList to="/restaurantes" titulo={`Editar ${restaurante.nome}`} />
@@ -135,7 +175,7 @@ export default function EditRestaurant() {
                 <main>
                     <Input type="text" name="nome" label="Nome" placeholder="Nome" tamanho="20em" value={restaurante.nome} handleChange={(e) => handleInput(e, "nome")} />
 
-                    <Input type="text" name="cnpj" label="CNPJ" placeholder="CNPJ" tamanho="15em" value={restaurante.cnpj} handleChange={(e) => handleInput(e, "cnpj")} />
+                    <Input type="text" name="cnpj" label="CNPJ" placeholder="CNPJ" tamanho="15em" value={CNPJMask(restaurante.cnpj)} handleChange={(e) => handleInput(e, "cnpj")} />
 
                     <Select name="tipo" label="Tipo" options={tipos} value={restaurante.tipo} handleOnChange={handleSelect} />
 
@@ -143,11 +183,13 @@ export default function EditRestaurant() {
 
                     <Input type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="10em" value={restaurante.deliveryTime} handleChange={(e) => handleInput(e, "deliveryTime")} />
 
-                    <Input type="text" name="cep" label="CEP" placeholder="CEP" tamanho="10em" value={restaurante.endereco.cep} handleChange={(e) => handleInput(e, "endereco.cep")} />
+                    <Input type="text" name="cep" label="CEP" placeholder="CEP" tamanho="10em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
 
                     <Input type="text" name="estado" label="Estado" placeholder="Estado" tamanho="15em" value={restaurante.endereco.estado} handleChange={(e) => handleInput(e, "endereco.estado")} />
 
                     <Input type="text" name="cidade" label="Cidade" placeholder="Cidade" tamanho="15em" value={restaurante.endereco.cidade} handleChange={(e) => handleInput(e, "endereco.cidade")} />
+
+                    <Input type="text" name="bairro" label="Bairro" placeholder="Bairro" tamanho="15em" value={restaurante.endereco.bairro} handleChange={(e) => handleInput(e, "endereco.bairro")} />
 
                     <Input type="text" name="rua" label="Rua" placeholder="Rua" tamanho="20em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
 

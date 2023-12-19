@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../../api/api";
 
+import { FONEMask } from "../../layout/mask";
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Select from "../../components/form/select";
@@ -15,14 +16,21 @@ import TypesUsersProps from "../../interfaces/typesUsersProps";
 export default function CreateUser() {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState<UsersProps[]>([]);
+    const [user, setUser] = useState<UsersProps>({
+        id: 0,
+        nome: '',
+        telefone: '',
+        typeUser: '',
+        email: '',
+        senha: ''
+    });
     const [typesUser, setTypesUser] = useState<TypesUsersProps[]>([]);
 
 
     useEffect(() => {
         api.get("/TiposUsuarios")
             .then((res) => setTypesUser(res.data))
-            .catch((error) => console.log("Não foi possivel buscar os tipos de usuários", error))
+            .catch((error) => console.log("Não foi possível buscar os tipos de usuários", error))
     }, []);
 
 
@@ -71,7 +79,7 @@ export default function CreateUser() {
 
                     <Input key="email" type="email" name="email" label="E-mail" tamanho="20em" placeholder="Digite o seu E-mail" handleChange={(e) => handleInput(e, "email")} />
 
-                    <Input key="telefone" type="text" name="telefone" label="Telefone" placeholder="Digite o seu Telefone" handleChange={(e) => handleInput(e, "telefone")} />
+                    <Input key="telefone" type="text" name="telefone" label="Telefone" placeholder="Digite o seu Telefone" value={FONEMask(user.telefone)} handleChange={(e) => handleInput(e, "telefone")} />
 
                     <Select key="typeUser" name="typeUser" label="Tipo" options={typesUser} handleOnChange={handleSelect} />
 

@@ -19,7 +19,7 @@ const NavBarRestaurantes = ({ handle }: NavBarRestaurantesProps) => {
             .then((res) => {
                 setTypes(res.data)
             })
-            .catch((error) => console.log("Não foi possivel buscar os tipos dos restaurantes", error))
+            .catch((error) => console.log("Não foi possível buscar os tipos dos restaurantes", error))
 
     }, [])
 

@@ -1,16 +1,18 @@
 import "../styles/components/formPratos.css";
 
+import Input from "./form/input";
 import Button from "./form/button";
 import InputFile from "./form/inputFile";
-import Input from "./form/input";
+import { PratosProps } from "../interfaces/restaurantesProps";
 
 interface FormPratosProps {
-    submit: (event: React.FormEvent<HTMLFormElement>) => void;
-    handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    handleInputChange: (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => void;
+    dados?: PratosProps
+    submit: (event: React.FormEvent<HTMLFormElement>) => void
+    handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    handleInputChange: (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => void
 }
 
-const FormPratos = ({ handleInputChange, handleImageChange, submit }: FormPratosProps) => {
+const FormPratos = ({ dados, handleInputChange, handleImageChange, submit }: FormPratosProps) => {
     return (
         <form onSubmit={submit} className="form">
             <section>
@@ -21,6 +23,8 @@ const FormPratos = ({ handleInputChange, handleImageChange, submit }: FormPratos
                 <Input type="text" name="descricao" label="Descrição" placeholder="Descrição do prato" tamanho="30em" handleChange={(e) => handleInputChange(e, "descricao")} />
 
                 <InputFile name="img" label="Selecione um arquivo" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
+
+                {dados?.img && <img src={dados?.img} alt="Imagem do prato" />}
             </section>
 
             <Button type="submit"> Cadastrar </Button>

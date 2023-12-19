@@ -6,6 +6,7 @@ import api from "../../api/api";
 
 import Header from "../../layout/header";
 import UsersProps from "../../interfaces/usersProps";
+import { toast, ToastContainer } from "react-toastify";
 import CardListUser from "../../components/cardListUser";
 
 export default function UserList() {
@@ -16,7 +17,7 @@ export default function UserList() {
 
         api.get("/usuarios")
             .then((res) => setUsers(res.data))
-            .catch((error) => console.error("Não foi possivel buscar os usuários", error))
+            .catch((error) => console.error("Não foi possível buscar os usuários", error))
 
     }, []);
 
@@ -25,12 +26,12 @@ export default function UserList() {
 
         api.delete(`/usuarios/${id}`)
             .then(() => {
-                alert("Usuário deletado com sucesso")
+                toast.success("Usuário deletado com sucesso!!")
                 setUsers(prevState => prevState.filter(user => user.id !== id))
             })
             .catch((error) => {
-                alert("Não foi possivel deletar o usuário, tente novamente mais tarde")
-                console.error("Não foi possivel deletar o usuário", error)
+                toast.error("Não foi possível deletar o usuário, tente novamente mais tarde")
+                console.error("Não foi possível deletar o usuário", error)
             })
 
     }
@@ -52,6 +53,8 @@ export default function UserList() {
 
     return (
         <>
+            <ToastContainer />
+
             <Header
                 to="/"
                 titulo="Usuários"

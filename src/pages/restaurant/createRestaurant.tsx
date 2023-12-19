@@ -1,16 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
 
+import api from "../../api/api";
+import apiCEP from "../../api/apiCEP";
+
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import HeaderList from "../../layout/headerList";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
 import InputLabel from "../../components/form/input";
+import { CEPMask, CNPJMask } from "../../layout/mask";
 import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
-import HeaderList from "../../layout/headerList";
-import api from "../../api/api";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateRestaurant() {
     const navigate = useNavigate();
@@ -28,8 +33,9 @@ export default function CreateRestaurant() {
         pratos: [],
         endereco: {
             cep: "",
-            cidade: "",
             estado: "",
+            cidade: "",
+            bairro: "",
             rua: "",
             numero: "",
             complemento: "",
@@ -40,8 +46,8 @@ export default function CreateRestaurant() {
     useEffect(() => {
         api.get('/TiposRestaurantes')
             .then((res) => setTipos(res.data))
-            .catch((error) => console.error("Não foi possivel buscar os tipos dos restaurantes", error));
-    }, [])
+            .catch((error) => console.error("Não foi possível buscar os tipos dos restaurantes", error));
+    }, []);
 
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
@@ -60,7 +66,7 @@ export default function CreateRestaurant() {
         } else {
             setRestaurante((prevState) => ({ ...prevState, [fieldName]: value }));
         }
-    }
+    };
 
 
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -70,7 +76,7 @@ export default function CreateRestaurant() {
             ...prevState,
             tipo: selectTypeRestaurant
         }))
-    }
+    };
 
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,23 +98,61 @@ export default function CreateRestaurant() {
 
             reader.readAsDataURL(files[0]);
         }
-    }
+    };
+
+
+    const buscaCEP = async () => {
+        const CEP = restaurante.endereco.cep.replace(/\D/g, "");
+
+        if (CEP.length === 8) {
+
+            await apiCEP.get(`/${CEP}/json/`)
+                .then((res) => {
+                    setRestaurante((prevState) => ({
+                        ...prevState,
+                        endereco: {
+                            ...prevState?.endereco,
+                            cep: res?.data?.cep,
+                            estado: res?.data?.uf,
+                            cidade: res?.data?.localidade,
+                            bairro: res?.data?.bairro,
+                            rua: res?.data?.logradouro,
+                            numero: res?.data?.numero,
+                            complemento: res?.data?.complemento,
+                        },
+                    }));
+                })
+                .catch((error) => console.error("Não foi possível buscar os dados do cep", error))
+        }
+    };
 
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
 
         api.post("/restaurantes", restaurante)
             .then(() => {
-                alert("Restaurante cadastrado com sucesso!!")
-                navigate('/restaurantes')
-            })
-            .catch((error) => console.error("Não foi possivel cadastrar o restaurante", error))
-    }
+                toast.success("Restaurante cadastrado com sucesso!!")
 
+                setTimeout(() => {
+                    navigate('/restaurantes')
+                }, 5000)
+
+            })
+            .catch((error) => {
+                toast.error("Não foi possível cadastrar o restaurante, tente novamente mais tarde")
+                console.error("Não foi possível cadastrar o restaurante", error)
+            })
+    };
+
+
+    useEffect(() => {
+        buscaCEP();
+    }, [restaurante.endereco.cep]);
 
     return (
         <form onSubmit={submit}>
+            <ToastContainer />
 
             <header className="header-create-rest">
                 <HeaderList to="/restaurantes" titulo="Cadastro de Restaurante:" />
@@ -121,7 +165,7 @@ export default function CreateRestaurant() {
                 <main>
                     <InputLabel type="text" name="nome" label="Nome" placeholder="Nome" tamanho="20em" handleChange={(e) => handleInput(e, "nome")} />
 
-                    <InputLabel type="text" name="cnpj" label="CNPJ" placeholder="CNPJ" tamanho="15em" handleChange={(e) => handleInput(e, "cnpj")} />
+                    <InputLabel type="text" name="cnpj" label="CNPJ" placeholder="CNPJ" tamanho="15em" value={CNPJMask(restaurante.cnpj)} handleChange={(e) => handleInput(e, "cnpj")} />
 
                     <Select name="tipo" label="Tipo" options={tipos} handleOnChange={handleSelect} />
 
@@ -129,17 +173,19 @@ export default function CreateRestaurant() {
 
                     <InputLabel type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="10em" handleChange={(e) => handleInput(e, "deliveryTime")} />
 
-                    <InputLabel type="text" name="cep" label="CEP" placeholder="CEP" tamanho="10em" handleChange={(e) => handleInput(e, "endereco.cep")} />
+                    <InputLabel type="text" name="cep" label="CEP" placeholder="CEP" tamanho="10em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
 
-                    <InputLabel type="text" name="cidade" label="Cidade" placeholder="Cidade" tamanho="15em" handleChange={(e) => handleInput(e, "endereco.cidade")} />
+                    <InputLabel type="text" name="estado" label="Estado" placeholder="Estado" tamanho="15em" value={restaurante.endereco.estado} handleChange={(e) => handleInput(e, "endereco.estado")} />
 
-                    <InputLabel type="text" name="estado" label="Estado" placeholder="Estado" tamanho="15em" handleChange={(e) => handleInput(e, "endereco.estado")} />
+                    <InputLabel type="text" name="cidade" label="Cidade" placeholder="Cidade" tamanho="15em" value={restaurante.endereco.cidade} handleChange={(e) => handleInput(e, "endereco.cidade")} />
 
-                    <InputLabel type="text" name="rua" label="Rua" placeholder="Rua" tamanho="20em" handleChange={(e) => handleInput(e, "endereco.rua")} />
+                    <InputLabel type="text" name="bairro" label="Bairro" placeholder="Bairro" tamanho="15em" value={restaurante.endereco.bairro} handleChange={(e) => handleInput(e, "endereco.bairro")} />
 
-                    <InputLabel type="number" name="numero" label="Número" placeholder="Número" tamanho="10em" handleChange={(e) => handleInput(e, "endereco.numero")} />
+                    <InputLabel type="text" name="rua" label="Rua" placeholder="Rua" tamanho="20em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
 
-                    <InputLabel type="text" name="complemento" label="Complemento" placeholder="Complemento" tamanho="15em" handleChange={(e) => handleInput(e, "endereco.complemento")} />
+                    <InputLabel type="number" name="numero" label="Número" placeholder="Número" tamanho="10em" value={restaurante.endereco.numero} handleChange={(e) => handleInput(e, "endereco.numero")} />
+
+                    <InputLabel type="text" name="complemento" label="Complemento" placeholder="Complemento" tamanho="15em" value={restaurante.endereco.complemento} handleChange={(e) => handleInput(e, "endereco.complemento")} />
 
                     <InputFile name="imagem" label="Selecione uma Imagem" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
 

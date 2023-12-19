@@ -8,6 +8,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 
 import UsersProps from "../interfaces/usersProps";
+import { FONEMask } from "../layout/mask";
 
 interface CardListUserProps {
     item: UsersProps
@@ -26,7 +27,7 @@ const CardListUser = ({ item, remove }: CardListUserProps) => {
 
             <p> Nome: <span> {item.nome} </span> </p>
             <p> E-mail: <span> {item.email} </span> </p>
-            <p> Telefone: <span> {item.telefone} </span> </p>
+            <p> Telefone: <span> {FONEMask(item.telefone)} </span> </p>
             <p> Usuário: <span> {item.typeUser} </span> </p>
 
             <section>

@@ -10,6 +10,7 @@ import HeaderList from "../../layout/headerList";
 import Select from "../../components/form/select";
 import UsersProps from "../../interfaces/usersProps";
 import TypesUsersProps from "../../interfaces/typesUsersProps";
+import { FONEMask } from "../../layout/mask";
 
 export default function VizualizarUser() {
     const { id } = useParams();
@@ -28,14 +29,14 @@ export default function VizualizarUser() {
     useEffect(() => {
         api.get(`/usuarios/${id}`)
             .then((res) => setUser(res.data))
-            .catch((error) => console.error("Não foi possivel buscar o user", error))
+            .catch((error) => console.error("Não foi possível buscar o user", error))
     }, [id]);
 
 
     useEffect(() => {
         api.get('/tiposUsuarios')
             .then((res) => setTypeUser(res.data))
-            .catch((error) => console.error("Não foi possivel trazer os tipos dos usuários", error))
+            .catch((error) => console.error("Não foi possível trazer os tipos dos usuários", error))
     }, []);
 
 
@@ -54,7 +55,7 @@ export default function VizualizarUser() {
 
                     <Input key="email" type="email" name="email" label="E-mail" tamanho="20em" disable={true} value={user.email} />
 
-                    <Input key="telefone" type="text" name="telefone" label="Telefone" disable={true} value={user.telefone} />
+                    <Input key="telefone" type="text" name="telefone" label="Telefone" disable={true} value={FONEMask(user.telefone)} />
 
                     <Select key="typeUser" name="typeUser" label="Tipo" disable={true} value={user.typeUser} options={typeUser} />
 

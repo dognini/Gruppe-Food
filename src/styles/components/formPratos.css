@@ -1,6 +1,8 @@
 .form {
-    width: 94%;
-    padding: .5em;
+    display: flex;
+    flex-direction: column;
+    width: 92.5%;
+    padding: 1em;
     margin-bottom: 2em;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -8,7 +10,15 @@
 
 .form section {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+}
+
+.form section img {
+    width: 7em;
+    height: 4em;
+    border-radius: 2px;
 }
 
 .form button {

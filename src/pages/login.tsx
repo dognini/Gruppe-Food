@@ -20,7 +20,7 @@ export default function Login() {
             .then((res) => {
                 setUsers(res.data);
             })
-            .catch((error) => console.error("Não foi possivel buscar os usuarios", error))
+            .catch((error) => console.error("Não foi possível buscar os usuarios", error))
     }, []);
 
 

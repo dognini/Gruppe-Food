@@ -16,7 +16,7 @@ export default function Home() {
 
         api.get('/restaurantes')
             .then((res) => {
-                setRestaurantes(res.data);
+                setRestaurantes(res.data)
                 setRestaurantesFiltrados(res.data)
             })
             .catch((error) => console.log(error))
@@ -28,9 +28,10 @@ export default function Home() {
 
         if (value === "Todos") {
             setRestaurantesFiltrados(restaurantes);
+        } else {
+            setRestaurantesFiltrados(restaurantes.filter((restaurante) => restaurante.tipo === value));
         }
 
-        setRestaurantesFiltrados(restaurantes.filter((restaurante) => restaurante.tipo === value));
     }
 
     return (

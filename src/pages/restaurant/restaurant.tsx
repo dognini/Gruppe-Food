@@ -10,8 +10,10 @@ import Button from "../../components/form/button";
 import PratoCard from "../../components/cardPratos";
 import FormPratos from "../../components/formPratos";
 import UsersProps from "../../interfaces/usersProps";
+import { ToastContainer, toast } from "react-toastify";
 import HeaderRestaurant from "../../layout/headerRestaurant";
 import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
+
 
 export default function Restaurant() {
     const { id } = useParams();
@@ -46,11 +48,13 @@ export default function Restaurant() {
 
 
     useEffect(() => {
+
         api.get(`/restaurantes/${id}`)
             .then((res) => {
                 setRestaurante(res.data)
             })
             .catch((error) => console.log("Algo deu errado", error))
+
     }, [id]);
 
 
@@ -84,10 +88,12 @@ export default function Restaurant() {
                 const base64 = reader.result
 
                 if (typeof base64 === 'string') {
+
                     setPratos((prevState) => ({
                         ...prevState,
                         img: base64
                     }));
+
                 }
             }
 
@@ -116,13 +122,17 @@ export default function Restaurant() {
             .then((res) => {
                 setRestaurante(res.data)
                 setShowFormPrato(prevState => !prevState)
-                console.log("Prato cadastrado com sucesso!", res.data)
+                toast.success("Prato cadastrado com sucesso!")
             })
-            .catch((error) => console.log("Não foi possivel cadastrar o prato", error))
+            .catch((error) => {
+                toast.error("Não foi possível cadastrar o prato")
+                console.log("Não foi possível cadastrar o prato", error)
+            })
     }
 
     return (
         <section>
+            <ToastContainer />
 
             {restaurante && <HeaderRestaurant
                 restaurante={restaurante}
@@ -139,7 +149,7 @@ export default function Restaurant() {
                     }
                 </header>
 
-                {showFormPrato && <FormPratos handleImageChange={handleImageChange} handleInputChange={handleInput} submit={submit} />}
+                {showFormPrato && <FormPratos dados={pratos} handleImageChange={handleImageChange} handleInputChange={handleInput} submit={submit} />}
 
                 <main>
                     <PratoCard

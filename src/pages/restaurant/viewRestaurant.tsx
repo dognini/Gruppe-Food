@@ -29,6 +29,7 @@ export default function ViewRestaurant() {
             cep: "",
             cidade: "",
             estado: "",
+            bairro: "",
             rua: "",
             numero: "",
             complemento: "",
@@ -38,13 +39,13 @@ export default function ViewRestaurant() {
     useEffect(() => {
         api.get(`/restaurantes/${id}`)
             .then((res) => setRestaurante(res.data))
-            .catch((error) => console.error("Não foi possivel buscar os dados do restaurante", error))
+            .catch((error) => console.error("Não foi possível buscar os dados do restaurante", error))
     }, [id]);
 
     useEffect(() => {
         api.get(`/TiposRestaurantes`)
             .then((res) => setTipos(res.data))
-            .catch((error) => console.error("Não foi possivel buscar os tipos de restaurantes", error))
+            .catch((error) => console.error("Não foi possível buscar os tipos de restaurantes", error))
     }, []);
 
     return (
@@ -70,6 +71,8 @@ export default function ViewRestaurant() {
                     <Input type="text" name="estado" label="Estado" tamanho="15em" disable value={restaurante.endereco.estado} />
 
                     <Input type="text" name="cidade" label="Cidade" tamanho="15em" disable value={restaurante.endereco.cidade} />
+
+                    <Input type="text" name="bairro" label="Bairro" tamanho="15em" disable value={restaurante.endereco.bairro} />
 
                     <Input type="text" name="rua" label="Rua" tamanho="20em" disable value={restaurante.endereco.rua} />
 

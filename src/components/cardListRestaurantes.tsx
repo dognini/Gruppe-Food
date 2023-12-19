@@ -1,9 +1,10 @@
 import "../styles/components/cardList.css";
 
 import { FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { CNPJMask } from "../layout/mask";
 import { MdDelete, MdEdit } from "react-icons/md";
 import RestaurantesProps from "../interfaces/restaurantesProps";
-import { Link } from "react-router-dom";
 
 interface CardListRestaurantesProps {
     item: RestaurantesProps
@@ -17,7 +18,7 @@ const CardListRestaurantes = ({ item, remove }: CardListRestaurantesProps) => {
             <img src={item.imagem} alt={`Imagem do restaurante ${item.nome}`} />
 
             <p> Nome: <span> {item.nome} </span> </p>
-            <p> CNPJ: <span> {item.cnpj} </span> </p>
+            <p> CNPJ: <span> {CNPJMask(item.cnpj)} </span> </p>
             <p> Tempo de Entrega: <span> {item.deliveryTime}min </span> </p>
             <p> Frete: <span> R$: {item.frete},00 </span> </p>
 

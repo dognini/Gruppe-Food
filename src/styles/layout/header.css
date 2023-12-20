@@ -3,8 +3,7 @@
     align-items: center;
     justify-content: space-between;
     width: 94%;
-    margin-top: 1em;
-    margin-bottom: 2em;
+    margin: 1.5em 0;
 }
 
 .header div {
@@ -14,11 +13,28 @@
 }
 
 .header div h1 {
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
 .header div input {
     width: 15em;
     border-radius: 2px;
     border: 1px solid lightgray;
+}
+
+@media screen and (min-width: 1920px) {
+    .header {
+        margin: 2em 0;
+    }
+
+    .header div h1 {
+        font-size: 2.7em;
+    }
+
+    .header div input {
+        width: 16em;
+        height: 2.7em;
+        border-radius: 2px;
+        border: 1px solid lightgray;
+    }
 }

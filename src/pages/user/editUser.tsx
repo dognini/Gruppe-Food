@@ -1,10 +1,9 @@
 import "../../styles/pages/user/createuser.css";
 
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import api from "../../api/api";
-
 import { FONEMask } from "../../layout/mask";
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
@@ -12,11 +11,10 @@ import Button from "../../components/form/button";
 import Select from "../../components/form/select";
 import UsersProps from "../../interfaces/usersProps";
 import TypesUsersProps from "../../interfaces/typesUsersProps";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function EditUSer() {
     const { id } = useParams();
-
-    const navigate = useNavigate();
 
     const [user, setUser] = useState<UsersProps>({
         id: 0,
@@ -65,8 +63,7 @@ export default function EditUSer() {
 
         api.patch(`/usuarios/${id}`, user)
             .then(() => {
-                alert("Usuário cadastrado com sucesso!")
-                navigate("/usuarios");
+                toast.success("Usuário cadastrado com sucesso!")
             })
             .catch((error) => console.error("Erro ao cadastrar um usuário: ", error))
     }
@@ -74,11 +71,12 @@ export default function EditUSer() {
 
     return (
         <form onSubmit={submit}>
+            <ToastContainer />
 
             <header className="header-create-user">
                 <HeaderList
                     to="/usuarios"
-                    titulo="Editar Usuário"
+                    titulo={`Editar ${user.nome}`}
                 />
 
                 <Button type="submit"> Salvar </Button>

@@ -2,9 +2,9 @@ import "../../styles/pages/user/createuser.css";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../api/api";
-
 import { FONEMask } from "../../layout/mask";
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
@@ -56,8 +56,11 @@ export default function CreateUser() {
 
         api.post("/usuarios", user)
             .then(() => {
-                alert("Usuário cadastrado com sucesso!!")
-                navigate("/usuarios");
+                toast.success("Usuário cadastrado com sucesso!!")
+
+                setTimeout(() => {
+                    navigate("/usuarios");
+                }, 3000)
             })
             .catch((error) => console.error("Erro ao cadastrar um usuário: ", error))
     }
@@ -65,6 +68,7 @@ export default function CreateUser() {
 
     return (
         <form onSubmit={submit}>
+            <ToastContainer />
 
             <header className="header-create-user">
                 <HeaderList to="/usuarios" titulo="Cadastro de Usuário" />

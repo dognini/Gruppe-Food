@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 
-import api from "../../api/api";
+import { useEffect, useState } from "react";
 
+import api from "../../api/api";
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Select from "../../components/form/select";
 import InputFile from "../../components/form/inputFile";
-import { useEffect, useState } from "react";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
 import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 
@@ -64,7 +64,7 @@ export default function ViewRestaurant() {
 
                     <Input type="number" name="frete" label="Frete" tamanho="10em" disable value={restaurante.frete} />
 
-                    <Input type="number" name="deliveryTime" label="Tempo de Entrega" tamanho="10em" disable value={restaurante.deliveryTime} />
+                    <Input type="number" name="deliveryTime" label="Tempo de Entrega" tamanho="12em" disable value={restaurante.deliveryTime} />
 
                     <Input type="text" name="cep" label="CEP" tamanho="10em" disable value={restaurante.endereco.cep} />
 
@@ -74,11 +74,11 @@ export default function ViewRestaurant() {
 
                     <Input type="text" name="bairro" label="Bairro" tamanho="15em" disable value={restaurante.endereco.bairro} />
 
-                    <Input type="text" name="rua" label="Rua" tamanho="20em" disable value={restaurante.endereco.rua} />
+                    <Input type="text" name="rua" label="Rua" tamanho="25em" disable value={restaurante.endereco.rua} />
 
                     <Input type="number" name="numero" label="Número" tamanho="10em" disable value={restaurante.endereco.numero} />
 
-                    <Input type="text" name="complemento" label="Complemento" tamanho="15em" disable value={restaurante.endereco.complemento} />
+                    <Input type="text" name="complemento" label="Complemento" tamanho="20em" disable value={restaurante.endereco.complemento} />
 
                     <InputFile name="imagem" label="Arquivo Selecionado" disable />
 

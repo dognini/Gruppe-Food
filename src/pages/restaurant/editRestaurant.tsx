@@ -3,11 +3,10 @@ import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 import api from "../../api/api";
 import apiCEP from "../../api/apiCEP";
-
-import { toast, ToastContainer } from "react-toastify";
 import Input from "../../components/form/input";
 import HeaderList from "../../layout/headerList";
 import Button from "../../components/form/button";
@@ -181,7 +180,7 @@ export default function EditRestaurant() {
 
                     <Input type="number" name="frete" label="Frete" placeholder="Frete" tamanho="10em" value={restaurante.frete} handleChange={(e) => handleInput(e, "frete")} />
 
-                    <Input type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="10em" value={restaurante.deliveryTime} handleChange={(e) => handleInput(e, "deliveryTime")} />
+                    <Input type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="15em" value={restaurante.deliveryTime} handleChange={(e) => handleInput(e, "deliveryTime")} />
 
                     <Input type="text" name="cep" label="CEP" placeholder="CEP" tamanho="10em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
 
@@ -191,11 +190,11 @@ export default function EditRestaurant() {
 
                     <Input type="text" name="bairro" label="Bairro" placeholder="Bairro" tamanho="15em" value={restaurante.endereco.bairro} handleChange={(e) => handleInput(e, "endereco.bairro")} />
 
-                    <Input type="text" name="rua" label="Rua" placeholder="Rua" tamanho="20em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
+                    <Input type="text" name="rua" label="Rua" placeholder="Rua" tamanho="25em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
 
                     <Input type="number" name="numero" label="Número" placeholder="Número" tamanho="10em" value={restaurante.endereco.numero} handleChange={(e) => handleInput(e, "endereco.numero")} />
 
-                    <Input type="text" name="complemento" label="Complemento" placeholder="Complemento" value={restaurante.endereco.complemento} tamanho="15em" handleChange={(e) => handleInput(e, "endereco.complemento")} />
+                    <Input type="text" name="complemento" label="Complemento" placeholder="Complemento" value={restaurante.endereco.complemento} tamanho="20em" handleChange={(e) => handleInput(e, "endereco.complemento")} />
 
                     <InputFile name="imagem" label="Selecione uma Imagem" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
 

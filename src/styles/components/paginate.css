@@ -1,0 +1,22 @@
+.paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin: 2em 0;
+}
+
+.paginate span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 1920px) {
+    .paginate {
+        margin: 4em 0;
+    }
+
+    .paginate span {
+        font-size: 20px;
+    }
+}

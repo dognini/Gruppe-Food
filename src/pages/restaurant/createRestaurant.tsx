@@ -2,12 +2,11 @@
 import "../../styles/pages/restaurant/createRestaurant.css";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 import api from "../../api/api";
 import apiCEP from "../../api/apiCEP";
-
-import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import HeaderList from "../../layout/headerList";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
@@ -136,7 +135,7 @@ export default function CreateRestaurant() {
 
                 setTimeout(() => {
                     navigate('/restaurantes')
-                }, 5000)
+                }, 3000)
 
             })
             .catch((error) => {
@@ -171,9 +170,9 @@ export default function CreateRestaurant() {
 
                     <InputLabel type="number" name="frete" label="Frete" placeholder="Frete" tamanho="10em" handleChange={(e) => handleInput(e, "frete")} />
 
-                    <InputLabel type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="10em" handleChange={(e) => handleInput(e, "deliveryTime")} />
+                    <InputLabel type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="15em" handleChange={(e) => handleInput(e, "deliveryTime")} />
 
-                    <InputLabel type="text" name="cep" label="CEP" placeholder="CEP" tamanho="10em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
+                    <InputLabel type="text" name="cep" label="CEP" placeholder="CEP" tamanho="12em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
 
                     <InputLabel type="text" name="estado" label="Estado" placeholder="Estado" tamanho="15em" value={restaurante.endereco.estado} handleChange={(e) => handleInput(e, "endereco.estado")} />
 
@@ -181,11 +180,11 @@ export default function CreateRestaurant() {
 
                     <InputLabel type="text" name="bairro" label="Bairro" placeholder="Bairro" tamanho="15em" value={restaurante.endereco.bairro} handleChange={(e) => handleInput(e, "endereco.bairro")} />
 
-                    <InputLabel type="text" name="rua" label="Rua" placeholder="Rua" tamanho="20em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
+                    <InputLabel type="text" name="rua" label="Rua" placeholder="Rua" tamanho="25em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
 
                     <InputLabel type="number" name="numero" label="Número" placeholder="Número" tamanho="10em" value={restaurante.endereco.numero} handleChange={(e) => handleInput(e, "endereco.numero")} />
 
-                    <InputLabel type="text" name="complemento" label="Complemento" placeholder="Complemento" tamanho="15em" value={restaurante.endereco.complemento} handleChange={(e) => handleInput(e, "endereco.complemento")} />
+                    <InputLabel type="text" name="complemento" label="Complemento" placeholder="Complemento" tamanho="20em" value={restaurante.endereco.complemento} handleChange={(e) => handleInput(e, "endereco.complemento")} />
 
                     <InputFile name="imagem" label="Selecione uma Imagem" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
 

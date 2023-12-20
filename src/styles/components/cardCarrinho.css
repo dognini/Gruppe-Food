@@ -9,8 +9,17 @@
 }
 
 .card-carrinho img {
-    width: 6em;
-    height: 5em;
+    width: 8em;
+    height: 6em;
+    border-radius: 3px;
+}
+
+.card-carrinho span {
+    font-weight: bold;
+}
+
+.card-carrinho span p {
+    font-weight: 400;
 }
 
 .card-carrinho section {
@@ -28,4 +37,10 @@
 .card-carrinho section p {
     font-size: 20px;
     padding: 0 6px 0 6px;
+}
+
+@media screen and (min-width: 1920px) {
+    .card-carrinho {
+        padding: 1em;
+    }
 }

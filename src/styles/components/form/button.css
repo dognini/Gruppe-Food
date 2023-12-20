@@ -14,3 +14,11 @@
     color: #ffac06;
     background-color: #333;
 }
+
+@media screen and (min-width: 1920px) {
+
+    .button {
+        font-size: 1.3em;
+    }
+
+}

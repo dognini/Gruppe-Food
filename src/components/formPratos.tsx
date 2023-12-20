@@ -20,7 +20,7 @@ const FormPratos = ({ dados, handleInputChange, handleImageChange, submit }: For
 
                 <Input type="number" name="preco" label="Preço" placeholder="Preço" tamanho="10em" handleChange={(e) => handleInputChange(e, "preco")} />
 
-                <Input type="text" name="descricao" label="Descrição" placeholder="Descrição do prato" tamanho="30em" handleChange={(e) => handleInputChange(e, "descricao")} />
+                <Input type="text" name="descricao" label="Descrição" placeholder="Descrição do prato" tamanho="50em" handleChange={(e) => handleInputChange(e, "descricao")} />
 
                 <InputFile name="img" label="Selecione um arquivo" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
 

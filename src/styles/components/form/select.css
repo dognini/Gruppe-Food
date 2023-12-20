@@ -3,14 +3,18 @@
     flex-direction: column;
 }
 
-.select {
-    width: 15em;
-}
-
 .select label {
     margin-bottom: 5px;
 }
 
 .select select {
+    width: 18em;
+    border-radius: 3px;
     border: 1px solid lightgray;
+}
+
+@media screen and (min-width: 1920px) {
+    .select select {
+        height: 2.9em;
+    }
 }

@@ -1,8 +1,8 @@
 import "../styles/pages/login.css";
 
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import api from "../api/api";
 import Input from "../components/form/input";
@@ -39,11 +39,14 @@ export default function Login() {
         if (filterUser) {
             localStorage.setItem("usuario", JSON.stringify(filterUser))
 
-            alert("Login feito com sucesso!!");
+            toast.success("Login feito com sucesso!!");
 
-            navigate('/');
+            setTimeout(() => {
+                navigate('/');
+            }, 3000)
+
         } else {
-            alert("E-mail ou senha errados");
+            toast.error("E-mail ou senha incorretos");
         }
 
     }
@@ -54,6 +57,8 @@ export default function Login() {
             <div className="login-imagem">
                 <h1> Gruppe Food </h1>
             </div>
+
+            <ToastContainer />
 
             <section className="login-form">
                 <form onSubmit={submit}>

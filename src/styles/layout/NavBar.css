@@ -57,3 +57,14 @@
     color: #ffac06;
     cursor: pointer
 }
+
+@media screen and (min-width: 1920px) {
+    .nav_bar_logo img {
+        height: 3.5em;
+        width: 3.5em;
+    }
+
+    .nav_bar_logo p {
+        font-size: 22px;
+    }
+}

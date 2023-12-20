@@ -1,6 +1,7 @@
 import "../styles/components/pratoCard.css";
 
 import { PratosProps } from "../interfaces/restaurantesProps";
+import TruncateText from "../layout/truncateText";
 
 interface PratoCardProps {
     dados?: PratosProps[]
@@ -19,7 +20,7 @@ const PratoCard = ({ dados, handleRemove }: PratoCardProps) => {
 
                     <section className="info-prato">
                         <h3> {item?.nome} </h3>
-                        <p> {item?.descricao} </p>
+                        <TruncateText delay={100} maxChars={26} text={item.descricao} />
                     </section>
 
                     <section className="card-actions">

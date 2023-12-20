@@ -1,7 +1,7 @@
 import "../../styles/components/form/button.css";
 
 interface BTNProps {
-    children: string
+    children: React.ReactNode
     type?: "button" | "submit" | "reset"
     onclick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }

@@ -4,6 +4,7 @@
     justify-content: space-between;
     width: 87%;
     padding: .5em;
+    margin-left: 5em;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
@@ -53,10 +54,24 @@
     transition: 0.2s;
 }
 
-.container-card section button:hover {
+.container-card section button a:hover {
     color: #ffac06;
 }
 
-.container-card section button a:hover {
-    color: #ffac06;
+@media screen and (min-width: 1920px) {
+    .container-card {
+        width: 88%;
+        padding: 1em;
+        margin-left: 5em;
+    }
+
+    .container-card p {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    .container-card p span {
+        font-size: 18px;
+        font-weight: 400;
+    }
 }

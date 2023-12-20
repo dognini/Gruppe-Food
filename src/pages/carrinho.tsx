@@ -2,6 +2,7 @@ import "../styles/pages/carrinho.css";
 
 import { useEffect, useState } from "react";
 
+import Button from "../components/form/button";
 import CardCarrinho from "../components/cardCarrinho";
 import { PratosProps } from "../interfaces/restaurantesProps";
 
@@ -20,18 +21,19 @@ export default function Carrinho() {
 
 
     const calcularPrecoTotal = () => {
+
         if (pedidos.length > 0) {
 
             const precoTotal = pedidos.reduce((total, prato) => {
-                const precoNumero = parseFloat(prato.preco.replace(",", "."));
+                const precoNumero = parseFloat(prato.preco);
 
                 return total + precoNumero * (prato.quantidade);
             }, 0)
 
-            return precoTotal.toFixed(2);
+            return precoTotal;
         }
 
-        return "0.00";
+        return "0";
     }
 
 
@@ -57,7 +59,7 @@ export default function Carrinho() {
 
         localStorage.setItem("pratos", JSON.stringify(updatePedidos));
     }
-    
+
 
     return (
         <section className="container">
@@ -83,8 +85,8 @@ export default function Carrinho() {
                 </main>
 
                 <footer>
-                    <h2> Total do Pedido: <span> {calcularPrecoTotal()} </span></h2>
-                    <button> Finalizar Pedido </button>
+                    <h2> Total do Pedido: <span> R$: {calcularPrecoTotal()},00 </span></h2>
+                    <Button> Finalizar Pedido </Button>
                 </footer>
 
             </div>

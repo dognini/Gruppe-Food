@@ -26,3 +26,9 @@
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (min-width: 1920px) {
+    .form-user {
+        width: 86.5%;
+    }
+}

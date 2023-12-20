@@ -34,20 +34,3 @@
     align-items: center;
     margin-top: 2em;
 }
-
-.carrinho footer button {
-    padding: .5em;
-    font-size: 15px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    background-color: #ffac06;
-    transition: .5s;
-}
-
-.carrinho footer button:hover {
-    color: #ffac06;
-    background-color: #333;
-    cursor: pointer;
-}

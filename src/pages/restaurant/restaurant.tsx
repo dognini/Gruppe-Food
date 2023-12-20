@@ -31,6 +31,7 @@ export default function Restaurant() {
     const [restaurante, setRestaurante] = useState<RestaurantesProps>();
     const [pratosNoCarrinho, setPratosNoCarrinho] = useState<PratosProps[]>([])
 
+
     useEffect(() => {
         const carrinho = localStorage.getItem("pratos") || "[]";
 
@@ -67,6 +68,8 @@ export default function Restaurant() {
             setPratosNoCarrinho(pratosNoCarrinho);
 
             localStorage.setItem("pratos", JSON.stringify(pratosNoCarrinho));
+
+            toast.success("Prato adicionado ao carrinho")
         }
     }
 

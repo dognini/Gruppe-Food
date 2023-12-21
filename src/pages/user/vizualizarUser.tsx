@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 import api from "../../api/api";
 
 import Input from "../../components/form/input";
-import HeaderList from "../../layout/headerList";
+import HeaderList from "../../layout/header/headerList";
 import Select from "../../components/form/select";
 import UsersProps from "../../interfaces/usersProps";
 import TypesUsersProps from "../../interfaces/typesUsersProps";

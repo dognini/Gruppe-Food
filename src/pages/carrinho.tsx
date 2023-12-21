@@ -3,7 +3,7 @@ import "../styles/pages/carrinho.css";
 import { useEffect, useState } from "react";
 
 import Button from "../components/form/button";
-import CardCarrinho from "../components/cardCarrinho";
+import CardCarrinho from "../components/card/cardCarrinho";
 import { PratosProps } from "../interfaces/restaurantesProps";
 
 export default function Carrinho() {

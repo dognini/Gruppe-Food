@@ -1,8 +1,8 @@
-import '../styles/components/cardRestaurants.css'
+import '../../styles/components/card/cardRestaurants.css';
 
 import { Link } from 'react-router-dom';
 
-import RestaurantesProps from "../interfaces/restaurantesProps";
+import RestaurantesProps from "../../interfaces/restaurantesProps";
 
 interface CardRestaurantsProps {
     dados: RestaurantesProps

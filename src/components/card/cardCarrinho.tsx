@@ -1,9 +1,10 @@
-import "../styles/components/cardCarrinho.css";
+import "../../styles/components/card/cardCarrinho.css";
+
+import { useState } from "react";
 
 import { LuPlus } from "react-icons/lu";
 import { AiFillDelete } from "react-icons/ai";
-import { PratosProps } from "../interfaces/restaurantesProps";
-import { useState } from "react";
+import { PratosProps } from "../../interfaces/restaurantesProps";
 
 interface CardCarrinhoProps {
     dados: PratosProps

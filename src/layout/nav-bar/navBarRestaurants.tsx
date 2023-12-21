@@ -1,9 +1,9 @@
-import "../styles/layout/navBarRestaurantes.css";
+import "../../styles/layout/nav-bar/navBarRestaurantes.css";
 
 import { useEffect, useState } from "react";
 
-import api from "../api/api";
-import TypesRestaurantsProps from "../interfaces/typesRestaurantsProps";
+import api from "../../api/api";
+import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 
 interface NavBarRestaurantesProps {
     handle: (e: React.MouseEvent<HTMLButtonElement>) => void

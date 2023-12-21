@@ -1,5 +1,8 @@
-import RestaurantesProps from "../interfaces/restaurantesProps";
-import ReturnArrow from "./returnArrow";
+import "../../styles/pages/restaurant/restaurant.css";
+
+import ReturnArrow from "../returnArrow";
+
+import RestaurantesProps from "../../interfaces/restaurantesProps";
 
 interface HeaderRestaurantProps {
     restaurante: RestaurantesProps

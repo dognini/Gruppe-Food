@@ -1,9 +1,9 @@
-import "../styles/layout/header.css";
+import "../../styles/layout/header.css";
 
 import { Link } from "react-router-dom";
 
-import ReturnArrow from "./returnArrow";
-import Button from "../components/form/button";
+import ReturnArrow from "../returnArrow";
+import Button from "../../components/form/button";
 
 interface HeaderProps {
     to: string

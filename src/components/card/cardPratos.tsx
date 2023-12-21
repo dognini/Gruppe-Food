@@ -1,7 +1,7 @@
-import "../styles/components/pratoCard.css";
+import "../../styles/components/card/pratoCard.css";
 
-import { PratosProps } from "../interfaces/restaurantesProps";
-import TruncateText from "../layout/truncateText";
+import { PratosProps } from "../../interfaces/restaurantesProps";
+import TruncateText from "../../layout/truncateText";
 
 interface PratoCardProps {
     dados?: PratosProps[]

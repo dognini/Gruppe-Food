@@ -1,10 +1,10 @@
-import "../styles/components/cardList.css";
+import "../../styles/components/card/cardList.css";
 
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { CNPJMask } from "../layout/mask";
+import { CNPJMask } from "../../layout/mask";
 import { MdDelete, MdEdit } from "react-icons/md";
-import RestaurantesProps from "../interfaces/restaurantesProps";
+import RestaurantesProps from "../../interfaces/restaurantesProps";
 
 interface CardListRestaurantesProps {
     item: RestaurantesProps

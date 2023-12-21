@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import api from "../../api/api";
-import Header from "../../layout/header";
+import Header from "../../layout/header/header";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
-import CardListRestaurantes from "../../components/cardListRestaurantes";
+import CardListRestaurantes from "../../components/card/cardListRestaurantes";
 import Paginate from "../../components/paginate";
 
 export default function RestaurantList() {

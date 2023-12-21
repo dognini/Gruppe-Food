@@ -1,10 +1,10 @@
-import "../styles/layout/NavBar.css";
+import "../../styles/layout/nav-bar/NavBar.css";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import UsersProps from "../interfaces/usersProps";
+import UsersProps from "../../interfaces/usersProps";
 
 const NavBar = () => {
     const [user, setUser] = useState<UsersProps>();
@@ -22,7 +22,7 @@ const NavBar = () => {
 
             <section className="nav_bar_logo">
                 <img src="/images/logo.png" alt="imagem da logo do gruppe food" />
-                <p>Gruppe Food</p>
+                <p> Gruppe Food </p>
             </section>
 
             <section className="nav_bar_cart">
@@ -55,11 +55,9 @@ const NavBar = () => {
                     </button>
                 </Link>
 
-                <Link to={'/login'}>
-                    <button>
-                        <FaUserCircle />
-                    </button>
-                </Link>
+                <button >
+                    <FaUserCircle />
+                </button>
 
             </section>
 

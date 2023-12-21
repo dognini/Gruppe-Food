@@ -1,13 +1,13 @@
-import "../styles/components/cardList.css";
+import "../../styles/components/card/cardList.css";
 
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaUserCog } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
-import { FONEMask } from "../layout/mask";
+import { FONEMask } from "../../layout/mask";
 import { MdDelete, MdEdit } from "react-icons/md";
-import UsersProps from "../interfaces/usersProps";
+import UsersProps from "../../interfaces/usersProps";
 
 interface CardListUserProps {
     item: UsersProps

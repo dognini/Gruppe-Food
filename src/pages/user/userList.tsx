@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import api from "../../api/api";
-import Header from "../../layout/header";
+import Header from "../../layout/header/header";
 import Paginate from "../../components/paginate";
 import UsersProps from "../../interfaces/usersProps";
-import CardListUser from "../../components/cardListUser";
+import CardListUser from "../../components/card/cardListUser";
 
 export default function UserList() {
 

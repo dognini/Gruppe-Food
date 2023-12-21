@@ -7,11 +7,11 @@ import api from "../../api/api";
 
 import { v4 as uuidv4 } from 'uuid';
 import Button from "../../components/form/button";
-import PratoCard from "../../components/cardPratos";
+import PratoCard from "../../components/card/cardPratos";
 import FormPratos from "../../components/formPratos";
 import UsersProps from "../../interfaces/usersProps";
 import { ToastContainer, toast } from "react-toastify";
-import HeaderRestaurant from "../../layout/headerRestaurant";
+import HeaderRestaurant from "../../layout/header/headerRestaurant";
 import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
 
 

@@ -4,8 +4,8 @@ import '../styles/pages/home.css';
 
 import api from "../api/api";
 import Banner from "../layout/banner";
-import CardRestaurants from "../components/cardRestaurants";
-import NavBarRestaurantes from "../layout/navBarRestaurants";
+import CardRestaurants from "../components/card/cardRestaurants";
+import NavBarRestaurantes from "../layout/nav-bar/navBarRestaurants";
 import RestaurantesProps from "../interfaces/restaurantesProps";
 
 export default function Home() {

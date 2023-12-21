@@ -1,6 +1,6 @@
-import "../styles/layout/header.css";
+import "../../styles/layout/header.css";
 
-import ReturnArrow from "./returnArrow"
+import ReturnArrow from "../returnArrow"
 
 interface HeaderProps {
     to: string

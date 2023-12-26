@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import api from "../../api/api";
 import { FONEMask } from "../../layout/mask";
 import Input from "../../components/form/input";
-import HeaderList from "../../layout/header/headerList";
+import HeaderList from "../../layout/header/header";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
 import UsersProps from "../../interfaces/usersProps";

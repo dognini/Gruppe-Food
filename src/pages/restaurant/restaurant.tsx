@@ -7,13 +7,17 @@ import api from "../../api/api";
 
 import { v4 as uuidv4 } from 'uuid';
 import Button from "../../components/form/button";
-import PratoCard from "../../components/card/cardPratos";
-import FormPratos from "../../components/formPratos";
 import UsersProps from "../../interfaces/usersProps";
 import { ToastContainer, toast } from "react-toastify";
+import PratoCard from "../../components/card/cardPratos";
+import FormPratos from "../../components/form/formPratos";
 import HeaderRestaurant from "../../layout/header/headerRestaurant";
 import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
 
+interface CarrinhoItemProps extends PratosProps {
+    restaurante: string
+    dataAdicao: string
+}
 
 export default function Restaurant() {
     const { id } = useParams();
@@ -33,18 +37,22 @@ export default function Restaurant() {
 
 
     useEffect(() => {
-        const carrinho = localStorage.getItem("pratos") || "[]";
+        const localUser = localStorage.getItem('usuario');
+        const parseUser = localUser ? JSON.parse(localUser) : null;
 
-        setPratosNoCarrinho(JSON.parse(carrinho))
-    }, []);
+        setUser(parseUser)
 
+        if (parseUser) {
 
-    useEffect(() => {
+            api.get(`/usuarios/${parseUser.id}`)
+                .then((res) => {
+                    const userData = res.data
+                    setPratosNoCarrinho(userData.pedidos)
+                })
+                .catch((error) => console.error("Não foi possivel buscar os pedido", error))
 
-        const localUSer = localStorage.getItem('usuario');
-        const user = localUSer ? JSON.parse(localUSer) : null;
+        }
 
-        setUser(user);
     }, []);
 
 
@@ -59,17 +67,29 @@ export default function Restaurant() {
     }, [id]);
 
 
-    const addLocation = (id: string) => {
-        const filteredDish = restaurante?.pratos?.find((prato) => prato.id === id);
+    const addPedidoCarrinho = (idPrato: string) => {
+        const filteredDish = restaurante?.pratos?.find((prato) => prato.id === idPrato);
 
         if (filteredDish) {
-            pratosNoCarrinho.push(filteredDish);
 
-            setPratosNoCarrinho(pratosNoCarrinho);
+            const novoItem: CarrinhoItemProps = {
+                ...filteredDish,
+                restaurante: restaurante?.nome || '',
+                dataAdicao: new Date().toLocaleDateString("pt-BR", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+            };
 
-            localStorage.setItem("pratos", JSON.stringify(pratosNoCarrinho));
+            const novoCarrinho = [...pratosNoCarrinho, novoItem];
 
-            toast.success("Prato adicionado ao carrinho")
+            setPratosNoCarrinho(novoCarrinho);
+
+            api.patch(`/usuarios/${user?.id}`, { pedidos: novoCarrinho })
+                .then(() => toast.success("Prato adicionado ao carrinho!!"))
+                .catch((error) => {
+                    toast.error("Não foi possível adicionar o prato ao carrinho, tente novamente mais tarde!")
+
+                    console.error("Não foi possível adicionar o prato ao carrinho, tente novamente mais tarde!", error)
+                })
+
         }
     }
 
@@ -129,7 +149,7 @@ export default function Restaurant() {
             })
             .catch((error) => {
                 toast.error("Não foi possível cadastrar o prato")
-                console.log("Não foi possível cadastrar o prato", error)
+                console.error("Não foi possível cadastrar o prato", error)
             })
     }
 
@@ -156,7 +176,7 @@ export default function Restaurant() {
 
                 <main>
                     <PratoCard
-                        handleRemove={addLocation}
+                        handleRemove={addPedidoCarrinho}
                         dados={restaurante?.pratos}
                     />
                 </main>

@@ -1,0 +1,36 @@
+.modalNav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalNav-overlay {
+    position: fixed;
+    top: 3.2em;
+    bottom: 0;
+    left: 0;
+    right: 5.3em;
+
+    display: flex;
+    align-items: start;
+    justify-content: end;
+}
+
+.modalNav-content {
+    width: 15%;
+    max-width: 20em;
+    border-radius: 5px;
+    background-color: #ffac06;
+}
+
+.modalNav-content ul li {
+    width: 100%;
+    padding: .5em;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modalNav-content ul li a:hover {
+    color: white;
+}

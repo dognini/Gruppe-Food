@@ -1,0 +1,11 @@
+.meus_pedidos_main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 5em;
+}
+
+.meus_pedidos_main h2 {
+    font-size: 25px;
+    margin-bottom: 1em;
+}

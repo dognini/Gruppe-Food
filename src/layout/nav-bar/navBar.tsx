@@ -1,13 +1,17 @@
 import "../../styles/layout/nav-bar/NavBar.css";
 
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+
 import UsersProps from "../../interfaces/usersProps";
+import ModalNav from "../../components/modal/modalNav";
 
 const NavBar = () => {
     const [user, setUser] = useState<UsersProps>();
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
 
@@ -17,51 +21,64 @@ const NavBar = () => {
         setUser(user);
     }, []);
 
+    const toggleModal = () => {
+        setShowModal(prevState => !prevState)
+    }
+
+    const FecharModal = () => {
+        setShowModal(false)
+    }
+
     return (
-        <header className="nav_bar_container">
+        <>
 
-            <section className="nav_bar_logo">
-                <img src="/images/logo.png" alt="imagem da logo do gruppe food" />
-                <p> Gruppe Food </p>
-            </section>
+            <header className="nav_bar_container">
 
-            <section className="nav_bar_cart">
+                <section className="nav_bar_logo">
+                    <img src="/images/logo.png" alt="imagem da logo do gruppe food" />
+                    <p> Gruppe Food </p>
+                </section>
 
-                <Link to={'/'}>
-                    <span>
-                        Home
-                    </span>
-                </Link>
+                <section className="nav_bar_cart">
 
-                {user?.typeUser === 'Administrador' &&
-                    <>
-                        <Link to={'/usuarios'}>
-                            <span>
-                                + Usuários
-                            </span>
-                        </Link>
+                    <Link to={'/'}>
+                        <span>
+                            Home
+                        </span>
+                    </Link>
 
-                        <Link to={'/restaurantes'}>
-                            <span>
-                                + Restaurante
-                            </span>
-                        </Link>
-                    </>
-                }
+                    {user?.typeUser === 'Administrador' &&
+                        <>
+                            <Link to={'/usuarios'}>
+                                <span>
+                                    + Usuários
+                                </span>
+                            </Link>
 
-                <Link to={'/carrinho'}>
-                    <button>
-                        <IoCartOutline />
+                            <Link to={'/restaurantes'}>
+                                <span>
+                                    + Restaurante
+                                </span>
+                            </Link>
+                        </>
+                    }
+
+                    <Link to={'/carrinho'}>
+                        <button>
+                            <IoCartOutline />
+                        </button>
+                    </Link>
+
+                    <button onClick={toggleModal}>
+                        <FaUserCircle />
                     </button>
-                </Link>
 
-                <button >
-                    <FaUserCircle />
-                </button>
+                </section>
 
-            </section>
+            </header>
 
-        </header>
+            {showModal && <ModalNav closeModal={FecharModal} showModal={true} />}
+        </>
     )
 }
 

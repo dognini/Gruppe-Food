@@ -2,19 +2,34 @@ import "../styles/pages/carrinho.css";
 
 import { useEffect, useState } from "react";
 
+import api from "../api/api";
 import Button from "../components/form/button";
+import UsersProps from "../interfaces/usersProps";
 import CardCarrinho from "../components/card/cardCarrinho";
 import { PratosProps } from "../interfaces/restaurantesProps";
+import { ToastContainer, toast } from "react-toastify";
+
 
 export default function Carrinho() {
+    const [user, setUser] = useState<UsersProps>();
     const [pedidos, setPedidos] = useState<PratosProps[]>([]);
 
 
     useEffect(() => {
-        const getPedido = localStorage.getItem("pratos")
+        const localUser = localStorage.getItem('usuario');
+        const parseUser = localUser ? JSON.parse(localUser) : null;
 
-        if (getPedido) {
-            setPedidos(JSON.parse(getPedido));
+        setUser(parseUser)
+
+        if (parseUser) {
+
+            api.get(`/usuarios/${parseUser.id}`)
+                .then((res) => {
+                    const userData = res.data
+                    setPedidos(userData.pedidos)
+                })
+                .catch((error) => console.error("Não foi possivel buscar os pedido", error))
+
         }
 
     }, []);
@@ -43,7 +58,14 @@ export default function Carrinho() {
 
         setPedidos(updatePedidos)
 
-        localStorage.setItem("pratos", JSON.stringify(updatePedidos));
+        if (user) {
+            api.patch(`usuarios/${user?.id}`, { pedidos: updatePedidos })
+                .then(() => toast.success("Prato deletado com sucesso!"))
+                .catch((error) => {
+                    toast.error("Não foi possível deletar o prato, tente novamente mais tarde")
+                    console.log("Não foi possível deletar o prato", error)
+                })
+        }
     }
 
 
@@ -57,12 +79,20 @@ export default function Carrinho() {
 
         setPedidos(updatePedidos);
 
-        localStorage.setItem("pratos", JSON.stringify(updatePedidos));
+        if (user) {
+            api.patch(`usuarios/${user?.id}`, { pedidos: updatePedidos })
+                .then(() => toast.success("Prato deletado com sucesso!"))
+                .catch((error) => {
+                    toast.error("Não foi possível deletar o prato, tente novamente mais tarde")
+                    console.log("Não foi possível deletar o prato", error)
+                })
+        }
     }
 
 
     return (
         <section className="container">
+            <ToastContainer />
 
             <div className="carrinho">
 

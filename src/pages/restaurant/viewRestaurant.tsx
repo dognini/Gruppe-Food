@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import api from "../../api/api";
 import Input from "../../components/form/input";
-import HeaderList from "../../layout/header/headerList";
+import HeaderList from "../../layout/header/header";
 import Select from "../../components/form/select";
 import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";

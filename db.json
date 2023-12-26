@@ -66,12 +66,14 @@
   ],
   "usuarios": [
     {
+      "id": 2,
       "nome": "Juan Carlos Nunes",
       "telefone": "(47) 9240-4919",
       "typeUser": "Usuário",
       "email": "juan.nunes@gruppe.com.br",
       "senha": "Diogodani2@",
-      "id": 2
+      "pedidos": [],
+      "carteira": []
     },
     {
       "nome": "Vitinho do kwid",
@@ -79,7 +81,9 @@
       "telefone": "47992404919",
       "typeUser": "Administrador",
       "senha": "Diogodani2@",
-      "id": 4
+      "id": 4,
+      "pedidos": [],
+      "carteira": []
     },
     {
       "id": 5,
@@ -87,7 +91,9 @@
       "telefone": "47992404919",
       "typeUser": "Usuário",
       "email": "flavio.gruppe@gruppe.com.br",
-      "senha": "Diogodani2@"
+      "senha": "Diogodani2@",
+      "pedidos": [],
+      "carteira": []
     },
     {
       "id": 6,
@@ -95,7 +101,9 @@
       "telefone": "(47) 9924-04919",
       "typeUser": "Administrador",
       "email": "diogo.correia@gruppe.com.br",
-      "senha": "Diogodani2@"
+      "senha": "Diogodani2@",
+      "pedidos": [],
+      "carteira": []
     }
   ],
   "TiposRestaurantes": [
@@ -148,6 +156,42 @@
     {
       "id": 2,
       "nome": "Administrador"
+    }
+  ],
+  "statusPedidos": [
+    {
+      "id": 1,
+      "status": "Em Espera"
+    },
+    {
+      "id": 2,
+      "status": "Em Produção"
+    },
+    {
+      "id": 3,
+      "status": "Pedido Enviado"
+    },
+    {
+      "id": 4,
+      "status": "Pedido Entregue"
+    }
+  ],
+  "MetodosPagamentos": [
+    {
+      "id": 1,
+      "nome": "Cartão de Crédito"
+    },
+    {
+      "id": 2,
+      "nome": "Cartão de Débito"
+    },
+    {
+      "id": 3,
+      "nome": "Pix"
+    },
+    {
+      "id": 4,
+      "nome": "Dinheiro"
     }
   ]
 }

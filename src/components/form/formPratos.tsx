@@ -1,9 +1,9 @@
-import "../styles/components/formPratos.css";
+import "../../styles/components/form/formPratos.css";
 
-import Input from "./form/input";
-import Button from "./form/button";
-import InputFile from "./form/inputFile";
-import { PratosProps } from "../interfaces/restaurantesProps";
+import Input from "./input";
+import Button from "./button";
+import InputFile from "./inputFile";
+import { PratosProps } from "../../interfaces/restaurantesProps";
 
 interface FormPratosProps {
     dados?: PratosProps

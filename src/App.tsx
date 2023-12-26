@@ -4,8 +4,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Home from "./pages/home";
 import Login from "./pages/login";
+import Perfil from "./pages/perfil";
+import Carteira from "./pages/carteira";
 import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
+import MeusPedidos from "./pages/meusPedidos";
 
 import UserList from "./pages/user/userList";
 import CreateUser from "./pages/user/createUser";
@@ -18,6 +21,7 @@ import CreateRestaurant from "./pages/restaurant/createRestaurant";
 import RestaurantesList from "./pages/restaurant/restaurantList";
 import ViewRestaurant from "./pages/restaurant/viewRestaurant";
 
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -29,6 +33,10 @@ export default function App() {
 
           <Route index element={<Home />} />
           <Route path="/carrinho" element={<Carrinho />} />
+
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/carteira" element={<Carteira />} />
+          <Route path="/meus-pedidos" element={<MeusPedidos />} />
 
           <Route path="/usuarios" element={<UserList />} />
           <Route path="/create-user" element={<CreateUser />} />

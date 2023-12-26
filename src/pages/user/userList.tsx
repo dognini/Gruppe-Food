@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import api from "../../api/api";
-import Header from "../../layout/header/header";
+import Header from "../../layout/header/headerList";
 import Paginate from "../../components/paginate";
 import UsersProps from "../../interfaces/usersProps";
 import CardListUser from "../../components/card/cardListUser";
@@ -76,7 +76,7 @@ export default function UserList() {
 
     useEffect(() => {
 
-        if (searchValue.length > 3) {
+        if (searchValue.length > 2) {
 
             api.get(`/usuarios?q=${searchValue}`)
                 .then((res) => setUsers(res.data))
@@ -86,6 +86,7 @@ export default function UserList() {
 
     }, [searchValue])
 
+    console.log(users)
 
     return (
         <>

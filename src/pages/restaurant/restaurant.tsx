@@ -2,17 +2,16 @@ import "../../styles/pages/restaurant/restaurant.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../api/api";
-
 import { v4 as uuidv4 } from 'uuid';
 import Button from "../../components/form/button";
-import UsersProps from "../../interfaces/usersProps";
-import { ToastContainer, toast } from "react-toastify";
 import PratoCard from "../../components/card/cardPratos";
 import FormPratos from "../../components/form/formPratos";
 import HeaderRestaurant from "../../layout/header/headerRestaurant";
 import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
+import UsersProps from "../../interfaces/usersProps";
 
 interface CarrinhoItemProps extends PratosProps {
     restaurante: string
@@ -22,7 +21,7 @@ interface CarrinhoItemProps extends PratosProps {
 export default function Restaurant() {
     const { id } = useParams();
 
-    const [user, setUser] = useState<UsersProps>();
+    const [user, setUser] = useState<UsersProps>()
     const [pratos, setPratos] = useState<PratosProps>({
         id: uuidv4(),
         nome: "",
@@ -37,22 +36,15 @@ export default function Restaurant() {
 
 
     useEffect(() => {
+        const localCarrinho = localStorage.getItem('carrinho');
+        const parseCarrinho = localCarrinho ? JSON.parse(localCarrinho) : null;
+
+        setPratosNoCarrinho(parseCarrinho)
+
         const localUser = localStorage.getItem('usuario');
         const parseUser = localUser ? JSON.parse(localUser) : null;
 
         setUser(parseUser)
-
-        if (parseUser) {
-
-            api.get(`/usuarios/${parseUser.id}`)
-                .then((res) => {
-                    const userData = res.data
-                    setPratosNoCarrinho(userData.pedidos)
-                })
-                .catch((error) => console.error("Não foi possivel buscar os pedido", error))
-
-        }
-
     }, []);
 
 
@@ -78,18 +70,15 @@ export default function Restaurant() {
                 dataAdicao: new Date().toLocaleDateString("pt-BR", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
             };
 
-            const novoCarrinho = [...pratosNoCarrinho, novoItem];
+            const novoCarrinho = pratosNoCarrinho !== null ? [...pratosNoCarrinho, novoItem] : [novoItem];
 
             setPratosNoCarrinho(novoCarrinho);
 
-            api.patch(`/usuarios/${user?.id}`, { pedidos: novoCarrinho })
-                .then(() => toast.success("Prato adicionado ao carrinho!!"))
-                .catch((error) => {
-                    toast.error("Não foi possível adicionar o prato ao carrinho, tente novamente mais tarde!")
+            localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
 
-                    console.error("Não foi possível adicionar o prato ao carrinho, tente novamente mais tarde!", error)
-                })
-
+            toast.success("Prato adicionado ao carrinho com sucesso!")
+        } else {
+            toast.error("Não foi possível adicionar o prato ao carrinho, tente novamente mais tarde")
         }
     }
 

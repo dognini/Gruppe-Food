@@ -28,7 +28,7 @@ export default function EditUSer() {
 
 
     useEffect(() => {
-        api.get("/TiposUsuarios")
+        api.get("/tiposUsuarios")
             .then((res) => setTypesUser(res.data))
             .catch((error) => console.error("Não foi possível buscar os tipos de usuários", error))
     }, []);

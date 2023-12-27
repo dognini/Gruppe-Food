@@ -50,7 +50,7 @@ export default function EditRestaurant() {
 
 
     useEffect(() => {
-        api.get('/TiposRestaurantes')
+        api.get('/tiposRestaurantes')
             .then((res) => setTipos(res.data))
             .catch((error) => console.error("Não foi possível buscar os tipos dos restaurantes", error));
     }, [])

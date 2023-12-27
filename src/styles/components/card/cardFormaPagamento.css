@@ -1,0 +1,12 @@
+.card_forma_de_pagamento {
+    width: 12%;
+    max-width: 20%;
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.card_forma_de_pagamento div {
+    margin-top: 1.5em;
+}

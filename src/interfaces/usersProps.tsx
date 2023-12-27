@@ -1,3 +1,4 @@
+import CarteiraProps from "./carteiraProps"
 import RestaurantesProps from "./restaurantesProps"
 
 export interface PedidosProps {
@@ -19,5 +20,5 @@ export default interface UsersProps {
     senha: string
     typeUser: string
     pedidos: PedidosProps[]
-    carteira: []
+    carteira: CarteiraProps[]
 }

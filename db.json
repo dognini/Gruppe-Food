@@ -103,10 +103,47 @@
       "email": "diogo.correia@gruppe.com.br",
       "senha": "Diogodani2@",
       "pedidos": [],
-      "carteira": []
+      "carteira": [
+        {
+          "typeCard": "Cartão de Débito",
+          "numero": "527527",
+          "validade": "7257",
+          "cvv": "85785",
+          "titular": "bhfyvff",
+          "cpf": "454545",
+          "apelido": "Débito Inter"
+        },
+        {
+          "typeCard": "Cartão de Crédito",
+          "numero": "453345656",
+          "validade": "5454",
+          "cvv": "644",
+          "titular": "teste",
+          "cpf": "35545454",
+          "apelido": "Crédito Inter"
+        },
+        {
+          "typeCard": "Cartão de Débito",
+          "numero": "12432353",
+          "validade": "5432",
+          "cvv": "545",
+          "titular": "fgsfgdhdfh",
+          "cpf": "454466",
+          "apelido": "Débito Viacred"
+        },
+        {
+          "typeCard": "Cartão de Crédito",
+          "numero": "132456789",
+          "validade": "1508",
+          "cvv": "756",
+          "titular": "DIOGO",
+          "cpf": "11567387926",
+          "apelido": "Crédito Viacred"
+        }
+      ]
     }
   ],
-  "TiposRestaurantes": [
+  "tiposRestaurantes": [
     {
       "id": 1,
       "nome": "Doces"
@@ -148,7 +185,7 @@
       "nome": "Japonesa"
     }
   ],
-  "TiposUsuarios": [
+  "tiposUsuarios": [
     {
       "id": 1,
       "nome": "Usuário"
@@ -176,7 +213,7 @@
       "status": "Pedido Entregue"
     }
   ],
-  "MetodosPagamentos": [
+  "metodosPagamentos": [
     {
       "id": 1,
       "nome": "Cartão de Crédito"
@@ -184,14 +221,6 @@
     {
       "id": 2,
       "nome": "Cartão de Débito"
-    },
-    {
-      "id": 3,
-      "nome": "Pix"
-    },
-    {
-      "id": 4,
-      "nome": "Dinheiro"
     }
   ]
 }

@@ -5,16 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../api/api";
+
 import { FONEMask } from "../../layout/mask";
 import Input from "../../components/form/input";
-import HeaderList from "../../layout/header/header";
 import Select from "../../components/form/select";
 import Button from "../../components/form/button";
+import HeaderList from "../../layout/header/header";
 import UsersProps from "../../interfaces/usersProps";
 import TypesUsersProps from "../../interfaces/typesUsersProps";
 
 export default function CreateUser() {
     const navigate = useNavigate();
+
 
     const [user, setUser] = useState<UsersProps>({
         id: 0,
@@ -22,13 +24,15 @@ export default function CreateUser() {
         telefone: '',
         typeUser: '',
         email: '',
-        senha: ''
+        senha: '',
+        carteira: [],
+        pedidos: []
     });
     const [typesUser, setTypesUser] = useState<TypesUsersProps[]>([]);
 
 
     useEffect(() => {
-        api.get("/TiposUsuarios")
+        api.get("/tiposUsuarios")
             .then((res) => setTypesUser(res.data))
             .catch((error) => console.log("Não foi possível buscar os tipos de usuários", error))
     }, []);

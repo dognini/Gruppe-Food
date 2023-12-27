@@ -1,0 +1,33 @@
+.section_formas_de_pagamento {
+    display: flex;
+    flex-direction: column;
+    width: 87%;
+    margin-left: 5em;
+}
+
+.section_formas_de_pagamento header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+}
+
+.section_formas_de_pagamento main {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.section_historico_de_transacao {
+    display: flex;
+    flex-direction: column;
+    width: 87%;
+    margin: 2em 0 1.5em 5em;
+}
+
+.section_historico_de_transacao main {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}

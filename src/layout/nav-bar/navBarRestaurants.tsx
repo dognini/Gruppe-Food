@@ -15,7 +15,7 @@ const NavBarRestaurantes = ({ handle }: NavBarRestaurantesProps) => {
 
     useEffect(() => {
 
-        api.get('/TiposRestaurantes')
+        api.get('/tiposRestaurantes')
             .then((res) => {
                 setTypes(res.data)
             })

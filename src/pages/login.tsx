@@ -15,6 +15,7 @@ export default function Login() {
     const [user, setUser] = useState<Partial<UsersProps>>({});
     const [users, setUsers] = useState<UsersProps[]>([]);
 
+
     useEffect(() => {
         api.get("/usuarios")
             .then((res) => {

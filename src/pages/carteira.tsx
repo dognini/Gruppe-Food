@@ -5,20 +5,21 @@ import api from "../api/api";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
+import { v4 as uuidv4 } from 'uuid';
 import Header from "../layout/header/header";
 import Button from "../components/form/button";
 import UsersProps from "../interfaces/usersProps";
+import SelectProps from "../interfaces/selectProps";
 import CarteiraProps from "../interfaces/carteiraProps";
 import CardCarteira from "../components/card/cardCarteira";
 import CardTransacao from "../components/card/cardTransacao";
 import FormMetodoPagamento from "../components/form/formMetodoPagamento";
-import TypesMetodoPagamentoProps from "../interfaces/typesMetodoPagamento";
 
 
 export default function Carteira() {
 
     const [showFormMetodoPagamento, setShowFormMetodoPagamento] = useState(false);
-    const [TypesMetodoPagamento, setTypesMetodoPagamento] = useState<TypesMetodoPagamentoProps[]>([]);
+    const [TypesMetodoPagamento, setTypesMetodoPagamento] = useState<SelectProps[]>([]);
 
     const [user, setUser] = useState<UsersProps>({
         id: 0,
@@ -28,9 +29,12 @@ export default function Carteira() {
         telefone: "",
         typeUser: "",
         pedidos: [],
-        carteira: []
+        carteira: [],
+        enderecos: []
     });
     const [carteira, setCarteira] = useState<CarteiraProps>({
+        id: uuidv4(),
+        favorito: false,
         typeCard: "",
         numero: "",
         validade: "",
@@ -81,7 +85,7 @@ export default function Carteira() {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const updateUser = {
+        const updateCarteira = {
             ...user,
             carteira: [
                 ...(user.carteira || []),
@@ -89,8 +93,9 @@ export default function Carteira() {
             ],
         };
 
-        api.patch(`/usuarios/${user?.id}`, updateUser)
+        api.patch(`/usuarios/${user?.id}`, updateCarteira)
             .then((res) => {
+                setUser(res.data)
                 toast.success("Cartão cadastrado com sucesso!!")
                 setShowFormMetodoPagamento(prevState => !prevState)
                 localStorage.setItem('usuario', JSON.stringify(res.data))
@@ -100,6 +105,7 @@ export default function Carteira() {
                 toast.error("Não foi possível cadastrar o cartão, tente novamente mais tarde")
             })
     }
+
 
     return (
         <section>
@@ -112,7 +118,7 @@ export default function Carteira() {
             <section className="section_formas_de_pagamento">
                 <header>
                     <h2> Formas de Pagamento: </h2>
-                    <Button onclick={ShowFormMetodoPagamento} > + Cadastrar </Button>
+                    <Button onclick={ShowFormMetodoPagamento} > Cadastrar </Button>
                 </header>
 
                 {showFormMetodoPagamento && <FormMetodoPagamento submit={submit} handleSelect={handleSelect} handleInputChange={handleInput} TypesMetodoPagamento={TypesMetodoPagamento} />}

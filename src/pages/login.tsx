@@ -66,9 +66,9 @@ export default function Login() {
                     <h1> Login </h1>
 
                     <section>
-                        <Input tamanho="20em" name="email" type="email" handleChange={(e) => handleInput(e, "email")} label="E-mail" placeholder="Digite o seu email" />
+                        <Input obrigatorio tamanho="20em" name="email" type="email" handleChange={(e) => handleInput(e, "email")} label="E-mail" placeholder="Digite o seu email" />
 
-                        <Input tamanho="20em" name="senha" type="password" handleChange={(e) => handleInput(e, 'senha')} label="Senha" placeholder="Digite a sua senha" />
+                        <Input obrigatorio tamanho="20em" name="senha" type="password" handleChange={(e) => handleInput(e, 'senha')} label="Senha" placeholder="Digite a sua senha" />
                     </section>
 
                     <Button type="submit"> Cadastrar </Button>

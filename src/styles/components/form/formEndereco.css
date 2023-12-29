@@ -1,27 +1,32 @@
-.formMetodoPagamento {
+.form {
     display: flex;
     flex-direction: column;
-    width: 97%;
+    width: 91%;
     padding: 1em;
     margin-bottom: 2em;
     border-radius: 5px;
-    border: 1px solid lightgrey;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.formMetodoPagamento section {
+.form section {
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
     margin-bottom: 2em;
 }
 
-.formMetodoPagamento button {
+.form section img {
+    width: 7em;
+    height: 4em;
+    border-radius: 2px;
+}
+
+.form button {
     margin: .5em;
 }
 
 @media screen and (min-width: 1920px) {
-    .formMetodoPagamento {
-        width: 98%;
+    .form {
+        width: 92%;
     }
 }

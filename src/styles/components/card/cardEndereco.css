@@ -1,0 +1,30 @@
+.card_endereco {
+    display: flex;
+    align-items: center;
+    min-width: 25%;
+    max-width: 100%;
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.card_endereco span {
+    margin-left: .5em;
+    font-size: 2em;
+    color: orange;
+}
+
+.card_endereco_list {
+    margin-left: 2em;
+}
+
+.card_endereco_list li p {
+    font-size: 14px;
+    font-weight: 500;
+    color: gray;
+}
+
+.card_endereco_list li b {
+    font-size: 16px;
+}

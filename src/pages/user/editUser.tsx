@@ -2,29 +2,32 @@ import "../../styles/pages/user/createuser.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../api/api";
 import { FONEMask } from "../../layout/mask";
 import Input from "../../components/form/input";
-import HeaderList from "../../layout/header/header";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
+import HeaderList from "../../layout/header/header";
 import UsersProps from "../../interfaces/usersProps";
-import TypesUsersProps from "../../interfaces/typesUsersProps";
-import { ToastContainer, toast } from "react-toastify";
+import SelectProps from "../../interfaces/selectProps";
 
 export default function EditUSer() {
     const { id } = useParams();
 
+    const [typesUser, setTypesUser] = useState<SelectProps[]>([]);
     const [user, setUser] = useState<UsersProps>({
         id: 0,
         nome: "",
-        email: "",
         telefone: "",
         typeUser: "",
-        senha: ""
+        email: "",
+        senha: "",
+        pedidos: [],
+        carteira: [],
+        enderecos: []
     });
-    const [typesUser, setTypesUser] = useState<TypesUsersProps[]>([]);
 
 
     useEffect(() => {
@@ -74,10 +77,7 @@ export default function EditUSer() {
             <ToastContainer />
 
             <header className="header-create-user">
-                <HeaderList
-                    to="/usuarios"
-                    titulo={`Editar ${user.nome}`}
-                />
+                <HeaderList to="/usuarios" titulo={`Editar ${user.nome}`} />
 
                 <Button type="submit"> Salvar </Button>
             </header>
@@ -85,15 +85,15 @@ export default function EditUSer() {
             <section className="form-user">
 
                 <main>
-                    <Input key="nome" type="text" name="nome" label="Nome" tamanho="20em" placeholder="Digite o seu nome" value={user.nome} handleChange={(e) => handleInput(e, "nome")} />
+                    <Input obrigatorio key="nome" type="text" name="nome" label="Nome" tamanho="20em" placeholder="Digite o seu nome" value={user.nome} handleChange={(e) => handleInput(e, "nome")} />
 
-                    <Input key="email" type="email" name="email" label="E-mail" tamanho="20em" placeholder="Digite o seu E-mail" value={user.email} handleChange={(e) => handleInput(e, "email")} />
+                    <Input obrigatorio key="email" type="email" name="email" label="E-mail" tamanho="20em" placeholder="Digite o seu E-mail" value={user.email} handleChange={(e) => handleInput(e, "email")} />
 
-                    <Input key="telefone" type="text" name="telefone" label="Telefone" placeholder="Digite o seu Telefone" value={FONEMask(user.telefone)} handleChange={(e) => handleInput(e, "telefone")} />
+                    <Input obrigatorio key="telefone" type="text" name="telefone" label="Telefone" placeholder="Digite o seu Telefone" value={FONEMask(user.telefone)} handleChange={(e) => handleInput(e, "telefone")} />
 
-                    <Select key="typeUser" name="typeUser" label="Tipo" value={user.typeUser} options={typesUser} handleOnChange={handleSelect} />
+                    <Select obrigatorio key="typeUser" name="typeUser" label="Tipo" value={user.typeUser} options={typesUser} handleOnChange={handleSelect} />
 
-                    <Input key="senha" type="password" name="senha" label="Senha" tamanho="15em" placeholder="Digite uma senha" handleChange={(e) => handleInput(e, "senha")} />
+                    <Input obrigatorio key="senha" type="password" name="senha" label="Senha" tamanho="15em" placeholder="Digite uma senha" handleChange={(e) => handleInput(e, "senha")} />
                 </main>
 
             </section>

@@ -1,0 +1,17 @@
+.enderecos_header {
+    display: flex;
+    align-items: center;
+    width: 94%;
+}
+
+.enderecos main {
+    margin-left: 5em;
+}
+
+.enderecos_main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    width: 88%;
+    margin: 0 0 2em 5em;
+}

@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 
 import api from "../../api/api";
 import Input from "../../components/form/input";
-import HeaderList from "../../layout/header/header";
 import Select from "../../components/form/select";
+import HeaderList from "../../layout/header/header";
+import SelectProps from "../../interfaces/selectProps";
 import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
-import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 
 
 export default function ViewRestaurant() {
     const { id } = useParams();
 
-    const [tipos, setTipos] = useState<TypesRestaurantsProps[]>([])
+    const [tipos, setTipos] = useState<SelectProps[]>([])
     const [restaurante, setRestaurante] = useState<RestaurantesProps>({
         id: 0,
         cnpj: "",
@@ -36,11 +36,13 @@ export default function ViewRestaurant() {
         },
     });
 
+
     useEffect(() => {
         api.get(`/restaurantes/${id}`)
             .then((res) => setRestaurante(res.data))
             .catch((error) => console.error("Não foi possível buscar os dados do restaurante", error))
     }, [id]);
+
 
     useEffect(() => {
         api.get(`/tiposRestaurantes`)
@@ -48,9 +50,9 @@ export default function ViewRestaurant() {
             .catch((error) => console.error("Não foi possível buscar os tipos de restaurantes", error))
     }, []);
 
+
     return (
         <>
-
             <HeaderList to="/restaurantes" titulo={`Vizualizar ${restaurante.nome}`} />
 
             <section className="form-rest">
@@ -86,7 +88,6 @@ export default function ViewRestaurant() {
                 </main>
 
             </section>
-
         </>
     )
 }

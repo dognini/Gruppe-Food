@@ -6,14 +6,16 @@ interface InputFileProps {
     placeholder?: string
     value?: string
     disable?: boolean
+    obrigatorio?: boolean
     handleChange?: (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => void
 }
 
-const InputFile = ({ name, label, placeholder, value, disable, handleChange }: InputFileProps) => {
+const InputFile = ({ name, label, placeholder, value, disable, obrigatorio, handleChange }: InputFileProps) => {
     return (
         <div className="input_file">
             <label htmlFor={name}> {label} </label>
             <input
+                required={obrigatorio}
                 type="file"
                 id={name}
                 name={name}

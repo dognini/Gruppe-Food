@@ -1,29 +1,31 @@
 import "../../styles/pages/user/createuser.css";
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 import api from "../../api/api";
-
-import Input from "../../components/form/input";
-import HeaderList from "../../layout/header/header";
-import Select from "../../components/form/select";
-import UsersProps from "../../interfaces/usersProps";
-import TypesUsersProps from "../../interfaces/typesUsersProps";
 import { FONEMask } from "../../layout/mask";
+import Input from "../../components/form/input";
+import Select from "../../components/form/select";
+import HeaderList from "../../layout/header/header";
+import UsersProps from "../../interfaces/usersProps";
+import SelectProps from "../../interfaces/selectProps";
 
 export default function VizualizarUser() {
     const { id } = useParams();
 
+    const [typeUser, setTypeUser] = useState<SelectProps[]>([]);
     const [user, setUser] = useState<UsersProps>({
         id: 0,
         nome: "",
         email: "",
         telefone: "",
         typeUser: "",
-        senha: ""
+        senha: "",
+        carteira: [],
+        enderecos: [],
+        pedidos: []
     });
-    const [typeUser, setTypeUser] = useState<TypesUsersProps[]>([]);
 
 
     useEffect(() => {

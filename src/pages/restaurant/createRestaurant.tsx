@@ -7,19 +7,19 @@ import { toast, ToastContainer } from "react-toastify";
 
 import api from "../../api/api";
 import apiCEP from "../../api/apiCEP";
-import HeaderList from "../../layout/header/header";
+import Input from "../../components/form/input";
 import Button from "../../components/form/button";
 import Select from "../../components/form/select";
-import InputLabel from "../../components/form/input";
+import HeaderList from "../../layout/header/header";
 import { CEPMask, CNPJMask } from "../../layout/mask";
+import SelectProps from "../../interfaces/selectProps";
 import InputFile from "../../components/form/inputFile";
 import RestaurantesProps from "../../interfaces/restaurantesProps";
-import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
 
 export default function CreateRestaurant() {
     const navigate = useNavigate();
 
-    const [tipos, setTipos] = useState<TypesRestaurantsProps[]>([]);
+    const [tipos, setTipos] = useState<SelectProps[]>([]);
     const [restaurante, setRestaurante] = useState<RestaurantesProps>({
         id: 0,
         cnpj: "",
@@ -116,8 +116,7 @@ export default function CreateRestaurant() {
                             cidade: res?.data?.localidade,
                             bairro: res?.data?.bairro,
                             rua: res?.data?.logradouro,
-                            numero: res?.data?.numero,
-                            complemento: res?.data?.complemento,
+                            numero: res.data.complemento
                         },
                     }));
                 })
@@ -139,8 +138,8 @@ export default function CreateRestaurant() {
 
             })
             .catch((error) => {
-                toast.error("Não foi possível cadastrar o restaurante, tente novamente mais tarde")
                 console.error("Não foi possível cadastrar o restaurante", error)
+                toast.error("Não foi possível cadastrar o restaurante, tente novamente mais tarde")
             })
     };
 
@@ -148,6 +147,7 @@ export default function CreateRestaurant() {
     useEffect(() => {
         buscaCEP();
     }, [restaurante.endereco.cep]);
+
 
     return (
         <form onSubmit={submit}>
@@ -160,37 +160,35 @@ export default function CreateRestaurant() {
             </header>
 
             <section className="form-rest">
-
                 <main>
-                    <InputLabel type="text" name="nome" label="Nome" placeholder="Nome" tamanho="20em" handleChange={(e) => handleInput(e, "nome")} />
+                    <Input obrigatorio type="text" name="nome" label="Nome" placeholder="Nome" tamanho="20em" handleChange={(e) => handleInput(e, "nome")} />
 
-                    <InputLabel type="text" name="cnpj" label="CNPJ" placeholder="CNPJ" tamanho="15em" value={CNPJMask(restaurante.cnpj)} handleChange={(e) => handleInput(e, "cnpj")} />
+                    <Input obrigatorio type="text" name="cnpj" label="CNPJ" placeholder="CNPJ" tamanho="15em" value={CNPJMask(restaurante.cnpj)} handleChange={(e) => handleInput(e, "cnpj")} />
 
-                    <Select name="tipo" label="Tipo" options={tipos} handleOnChange={handleSelect} />
+                    <Select obrigatorio name="tipo" label="Tipo" options={tipos} handleOnChange={handleSelect} />
 
-                    <InputLabel type="number" name="frete" label="Frete" placeholder="Frete" tamanho="10em" handleChange={(e) => handleInput(e, "frete")} />
+                    <Input obrigatorio type="number" name="frete" label="Frete" placeholder="Frete" tamanho="10em" handleChange={(e) => handleInput(e, "frete")} />
 
-                    <InputLabel type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="15em" handleChange={(e) => handleInput(e, "deliveryTime")} />
+                    <Input obrigatorio type="number" name="deliveryTime" label="Tempo de Entrega" placeholder="Tempo de entrega" tamanho="15em" handleChange={(e) => handleInput(e, "deliveryTime")} />
 
-                    <InputLabel type="text" name="cep" label="CEP" placeholder="CEP" tamanho="12em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
+                    <Input obrigatorio type="text" name="cep" label="CEP" placeholder="CEP" tamanho="12em" value={CEPMask(restaurante.endereco.cep)} handleChange={(e) => handleInput(e, "endereco.cep")} />
 
-                    <InputLabel type="text" name="estado" label="Estado" placeholder="Estado" tamanho="15em" value={restaurante.endereco.estado} handleChange={(e) => handleInput(e, "endereco.estado")} />
+                    <Input obrigatorio type="text" name="estado" label="Estado" placeholder="Estado" tamanho="15em" value={restaurante.endereco.estado} handleChange={(e) => handleInput(e, "endereco.estado")} />
 
-                    <InputLabel type="text" name="cidade" label="Cidade" placeholder="Cidade" tamanho="15em" value={restaurante.endereco.cidade} handleChange={(e) => handleInput(e, "endereco.cidade")} />
+                    <Input obrigatorio type="text" name="cidade" label="Cidade" placeholder="Cidade" tamanho="15em" value={restaurante.endereco.cidade} handleChange={(e) => handleInput(e, "endereco.cidade")} />
 
-                    <InputLabel type="text" name="bairro" label="Bairro" placeholder="Bairro" tamanho="15em" value={restaurante.endereco.bairro} handleChange={(e) => handleInput(e, "endereco.bairro")} />
+                    <Input obrigatorio type="text" name="bairro" label="Bairro" placeholder="Bairro" tamanho="15em" value={restaurante.endereco.bairro} handleChange={(e) => handleInput(e, "endereco.bairro")} />
 
-                    <InputLabel type="text" name="rua" label="Rua" placeholder="Rua" tamanho="25em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
+                    <Input obrigatorio type="text" name="rua" label="Rua" placeholder="Rua" tamanho="25em" value={restaurante.endereco.rua} handleChange={(e) => handleInput(e, "endereco.rua")} />
 
-                    <InputLabel type="number" name="numero" label="Número" placeholder="Número" tamanho="10em" value={restaurante.endereco.numero} handleChange={(e) => handleInput(e, "endereco.numero")} />
+                    <Input obrigatorio type="text" name="numero" label="Número" placeholder="Número" tamanho="10em" value={restaurante.endereco.numero} handleChange={(e) => handleInput(e, "endereco.numero")} />
 
-                    <InputLabel type="text" name="complemento" label="Complemento" placeholder="Complemento" tamanho="20em" value={restaurante.endereco.complemento} handleChange={(e) => handleInput(e, "endereco.complemento")} />
+                    <Input type="text" name="complemento" label="Complemento" placeholder="Complemento" tamanho="20em" handleChange={(e) => handleInput(e, "endereco.complemento")} />
 
-                    <InputFile name="imagem" label="Selecione uma Imagem" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
+                    <InputFile obrigatorio name="imagem" label="Selecione uma Imagem" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
 
                     {restaurante.imagem && <img src={restaurante.imagem} alt="imagem do restaurante" />}
                 </main>
-
             </section>
 
         </form>

@@ -12,6 +12,19 @@ export interface PedidosProps {
     restaurante: RestaurantesProps
 }
 
+export interface EnderecosUsersProps {
+    id: string
+    cep: string
+    estado: string
+    cidade: string
+    bairro: string
+    rua: string
+    numero: string
+    complemento: string
+    favorito: boolean
+    TypeEndereco: string
+}
+
 export default interface UsersProps {
     id: number
     nome: string
@@ -21,4 +34,5 @@ export default interface UsersProps {
     typeUser: string
     pedidos: PedidosProps[]
     carteira: CarteiraProps[]
+    enderecos: EnderecosUsersProps[]
 }

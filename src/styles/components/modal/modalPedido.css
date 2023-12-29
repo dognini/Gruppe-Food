@@ -1,0 +1,18 @@
+.modalPedido-overlay {
+    position: fixed;
+    top: 3.2em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalPedido-content {
+    width: 15%;
+    max-width: 20em;
+    border-radius: 5px;
+    background-color: #ffac06;
+}

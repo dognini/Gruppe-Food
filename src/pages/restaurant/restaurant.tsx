@@ -7,11 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 import api from "../../api/api";
 import { v4 as uuidv4 } from 'uuid';
 import Button from "../../components/form/button";
+import UsersProps from "../../interfaces/usersProps";
 import PratoCard from "../../components/card/cardPratos";
 import FormPratos from "../../components/form/formPratos";
 import HeaderRestaurant from "../../layout/header/headerRestaurant";
 import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesProps";
-import UsersProps from "../../interfaces/usersProps";
 
 interface CarrinhoItemProps extends PratosProps {
     restaurante: string
@@ -21,7 +21,10 @@ interface CarrinhoItemProps extends PratosProps {
 export default function Restaurant() {
     const { id } = useParams();
 
-    const [user, setUser] = useState<UsersProps>()
+    const [user, setUser] = useState<UsersProps>();
+    const [showFormPrato, setShowFormPrato] = useState<boolean>(false);
+    const [restaurante, setRestaurante] = useState<RestaurantesProps>();
+    const [pratosNoCarrinho, setPratosNoCarrinho] = useState<PratosProps[]>([]);
     const [pratos, setPratos] = useState<PratosProps>({
         id: uuidv4(),
         nome: "",
@@ -30,9 +33,6 @@ export default function Restaurant() {
         preco: "",
         quantidade: 1
     });
-    const [showFormPrato, setShowFormPrato] = useState<boolean>(false);
-    const [restaurante, setRestaurante] = useState<RestaurantesProps>();
-    const [pratosNoCarrinho, setPratosNoCarrinho] = useState<PratosProps[]>([])
 
 
     useEffect(() => {

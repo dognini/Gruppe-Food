@@ -8,10 +8,11 @@ interface InputLabelProps {
     placeholder?: string
     tamanho?: string
     value?: string
+    obrigatorio?: boolean
     handleChange?: (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => void
 }
 
-const Input = ({ type, name, label, placeholder, tamanho, value, disable, handleChange }: InputLabelProps) => {
+const Input = ({ type, name, label, placeholder, tamanho, value, disable, obrigatorio, handleChange }: InputLabelProps) => {
     return (
         <div className="input_label">
             <label htmlFor={name}>{label}</label>
@@ -20,6 +21,7 @@ const Input = ({ type, name, label, placeholder, tamanho, value, disable, handle
                 type={type}
                 name={name}
                 disabled={disable}
+                required={obrigatorio}
                 value={value}
                 placeholder={placeholder}
                 style={{ width: tamanho }}

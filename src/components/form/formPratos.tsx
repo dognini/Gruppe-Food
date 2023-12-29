@@ -16,13 +16,13 @@ const FormPratos = ({ dados, handleInputChange, handleImageChange, submit }: For
     return (
         <form onSubmit={submit} className="form">
             <section>
-                <Input type="text" name="nome" label="Nome" placeholder="Nome" tamanho="15em" handleChange={(e) => handleInputChange(e, "nome")} />
+                <Input obrigatorio type="text" name="nome" label="Nome" placeholder="Nome" tamanho="15em" handleChange={(e) => handleInputChange(e, "nome")} />
 
-                <Input type="number" name="preco" label="Preço" placeholder="Preço" tamanho="10em" handleChange={(e) => handleInputChange(e, "preco")} />
+                <Input obrigatorio type="number" name="preco" label="Preço" placeholder="Preço" tamanho="10em" handleChange={(e) => handleInputChange(e, "preco")} />
 
-                <Input type="text" name="descricao" label="Descrição" placeholder="Descrição do prato" tamanho="50em" handleChange={(e) => handleInputChange(e, "descricao")} />
+                <Input obrigatorio type="text" name="descricao" label="Descrição" placeholder="Descrição do prato" tamanho="50em" handleChange={(e) => handleInputChange(e, "descricao")} />
 
-                <InputFile name="img" label="Selecione um arquivo" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
+                <InputFile obrigatorio name="img" label="Selecione um arquivo" placeholder="Selecione um arquivo" handleChange={handleImageChange} />
 
                 {dados?.img && <img src={dados?.img} alt="Imagem do prato" />}
             </section>

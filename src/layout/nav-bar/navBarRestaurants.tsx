@@ -3,15 +3,14 @@ import "../../styles/layout/nav-bar/navBarRestaurantes.css";
 import { useEffect, useState } from "react";
 
 import api from "../../api/api";
-import TypesRestaurantsProps from "../../interfaces/typesRestaurantsProps";
+import SelectProps from "../../interfaces/selectProps";
 
 interface NavBarRestaurantesProps {
     handle: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const NavBarRestaurantes = ({ handle }: NavBarRestaurantesProps) => {
-
-    const [types, setTypes] = useState<TypesRestaurantsProps[]>([]);
+    const [types, setTypes] = useState<SelectProps[]>([]);
 
     useEffect(() => {
 

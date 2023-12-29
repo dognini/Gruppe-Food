@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import Button from "../components/form/button";
+import ModalPedido from "../components/modal/modalPedido";
 import CardCarrinho from "../components/card/cardCarrinho";
 import { PratosProps } from "../interfaces/restaurantesProps";
 
 
 export default function Carrinho() {
     const [pedidos, setPedidos] = useState<PratosProps[]>([]);
+    const [showModalPedidos, setShowModalPedidos] = useState(false)
 
     useEffect(() => {
         const localCarrinho = localStorage.getItem('carrinho');
@@ -43,7 +45,7 @@ export default function Carrinho() {
         setPedidos(updatePedidos)
 
         try {
-            localStorage.setItem("pratos", JSON.stringify(updatePedidos))
+            localStorage.setItem("carrinho", JSON.stringify(updatePedidos))
             toast.success("Prato deletado com sucesso!")
         } catch (error) {
             console.error("Não foi possível deletar o prato", error)
@@ -63,7 +65,16 @@ export default function Carrinho() {
 
         setPedidos(updatePedidos);
 
-        localStorage.setItem("pratos", JSON.stringify(updatePedidos));
+        localStorage.setItem("carrinho", JSON.stringify(updatePedidos));
+    }
+
+
+    const toggleModal = () => {
+        setShowModalPedidos(prevState => !prevState)
+    }
+
+    const fecharModal = () => {
+        setShowModalPedidos(false)
     }
 
 
@@ -93,11 +104,12 @@ export default function Carrinho() {
 
                 <footer>
                     <h2> Total do Pedido: <span> R$: {calcularPrecoTotal()},00 </span></h2>
-                    <Button> Finalizar Pedido </Button>
+                    <Button onclick={toggleModal}> Finalizar Pedido </Button>
                 </footer>
 
             </div>
 
+            {showModalPedidos && <ModalPedido closeModal={fecharModal} showModal={true} />}
         </section>
     )
 }

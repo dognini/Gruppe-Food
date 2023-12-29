@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+.modalNav-content ul li:hover {
+    color: white;
+}
+
 .modalNav-content ul li a:hover {
     color: white;
 }

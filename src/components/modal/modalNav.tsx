@@ -17,29 +17,25 @@ const ModalNav = ({ showModal, closeModal }: ModalProps) => {
     }
 
     return (
-        <section className="modalNav-container">
-            <ReactModal isOpen={showModal} onRequestClose={closeModal} contentLabel="Teste" overlayClassName="modalNav-overlay" className="modalNav-content">
-                <ul>
-                    <li>
-                        <Link to="/perfil"> Perfil </Link>
-                    </li>
+        <ReactModal isOpen={showModal} onRequestClose={closeModal} contentLabel="Teste" overlayClassName="modalNav-overlay" className="modalNav-content">
+            <ul>
+                <li>
+                    <Link to="/meus-pedidos"> Meus Pedidos </Link>
+                </li>
 
-                    <li>
-                        <Link to="/meus-pedidos"> Meus Pedidos </Link>
-                    </li>
+                <li>
+                    <Link to="/carteira"> Carteira </Link>
+                </li>
 
-                    <li>
-                        <Link to="/carteira"> Carteira </Link>
-                    </li>
+                <li>
+                    <Link to="/enderecos"> Endereços </Link>
+                </li>
 
-                    <li>
-                        <Link to="/endereco"> Endereço </Link>
-                    </li>
-
-                    <li onClick={exit}> Sair </li>
-                </ul>
-            </ReactModal>
-        </section>
+                <li onClick={exit}>
+                    Sair
+                </li>
+            </ul>
+        </ReactModal>
     )
 }
 

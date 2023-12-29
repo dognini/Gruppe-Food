@@ -12,12 +12,12 @@ import Select from "../../components/form/select";
 import Button from "../../components/form/button";
 import HeaderList from "../../layout/header/header";
 import UsersProps from "../../interfaces/usersProps";
-import TypesUsersProps from "../../interfaces/typesUsersProps";
+import SelectProps from "../../interfaces/selectProps";
 
 export default function CreateUser() {
     const navigate = useNavigate();
 
-
+    const [typesUser, setTypesUser] = useState<SelectProps[]>([]);
     const [user, setUser] = useState<UsersProps>({
         id: 0,
         nome: '',
@@ -25,10 +25,10 @@ export default function CreateUser() {
         typeUser: '',
         email: '',
         senha: '',
+        pedidos: [],
         carteira: [],
-        pedidos: []
+        enderecos: []
     });
-    const [typesUser, setTypesUser] = useState<TypesUsersProps[]>([]);
 
 
     useEffect(() => {
@@ -83,16 +83,17 @@ export default function CreateUser() {
             <section className="form-user">
 
                 <main>
-                    <Input key="nome" type="text" name="nome" label="Nome" tamanho="20em" placeholder="Digite o seu nome" handleChange={(e) => handleInput(e, "nome")} />
+                    <Input obrigatorio key="nome" type="text" name="nome" label="Nome" tamanho="20em" placeholder="Digite o seu nome" handleChange={(e) => handleInput(e, "nome")} />
 
-                    <Input key="email" type="email" name="email" label="E-mail" tamanho="20em" placeholder="Digite o seu E-mail" handleChange={(e) => handleInput(e, "email")} />
+                    <Input obrigatorio key="email" type="email" name="email" label="E-mail" tamanho="20em" placeholder="Digite o seu E-mail" handleChange={(e) => handleInput(e, "email")} />
 
-                    <Input key="telefone" type="text" name="telefone" label="Telefone" placeholder="Digite o seu Telefone" value={FONEMask(user.telefone)} handleChange={(e) => handleInput(e, "telefone")} />
+                    <Input obrigatorio key="telefone" type="text" name="telefone" label="Telefone" placeholder="Digite o seu Telefone" value={FONEMask(user.telefone)} handleChange={(e) => handleInput(e, "telefone")} />
 
-                    <Select key="typeUser" name="typeUser" label="Tipo" options={typesUser} handleOnChange={handleSelect} />
+                    <Select obrigatorio key="typeUser" name="typeUser" label="Tipo" options={typesUser} handleOnChange={handleSelect} />
 
-                    <Input key="senha" type="password" name="senha" label="Senha" tamanho="15em" placeholder="Digite uma senha" handleChange={(e) => handleInput(e, "senha")} />
+                    <Input obrigatorio key="senha" type="password" name="senha" label="Senha" tamanho="15em" placeholder="Digite uma senha" handleChange={(e) => handleInput(e, "senha")} />
                 </main>
+
             </section>
 
         </form>

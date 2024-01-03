@@ -1,19 +1,19 @@
-import "../styles/pages/carteira.css";
+import "../../styles/pages/carteira/carteira.css";
 
-import api from "../api/api";
+import api from "../../api/api";
 
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import { v4 as uuidv4 } from 'uuid';
-import Header from "../layout/header/header";
-import Button from "../components/form/button";
-import UsersProps from "../interfaces/usersProps";
-import SelectProps from "../interfaces/selectProps";
-import CarteiraProps from "../interfaces/carteiraProps";
-import CardCarteira from "../components/card/cardCarteira";
-import CardTransacao from "../components/card/cardTransacao";
-import FormMetodoPagamento from "../components/form/formMetodoPagamento";
+import Header from "../../layout/header/header";
+import Button from "../../components/form/button";
+import UsersProps from "../../interfaces/usersProps";
+import SelectProps from "../../interfaces/selectProps";
+import CarteiraProps from "../../interfaces/carteiraProps";
+import CardCarteira from "../../components/card/cardCarteira";
+import CardTransacao from "../../components/card/cardTransacao";
+import FormMetodoPagamento from "../../components/form/formMetodoPagamento";
 
 
 export default function Carteira() {
@@ -82,6 +82,35 @@ export default function Carteira() {
     }
 
 
+    const handleCheckox = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const checked = event.target.checked;
+
+        if (checked) {
+            const updateCarteira = user.carteira.map((endereco) => {
+
+                if (endereco.id !== carteira.id) {
+                    return { ...endereco, favorito: false }
+                }
+
+                return endereco;
+            }) || [];
+
+            setUser((prevState) => {
+                if (prevState) {
+                    return { ...prevState, carteira: updateCarteira }
+                }
+
+                return prevState
+            })
+        }
+
+        setCarteira((prevState) => ({
+            ...prevState,
+            favorito: checked
+        }))
+    }
+
+
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -121,7 +150,7 @@ export default function Carteira() {
                     <Button onclick={ShowFormMetodoPagamento} > Cadastrar </Button>
                 </header>
 
-                {showFormMetodoPagamento && <FormMetodoPagamento submit={submit} handleSelect={handleSelect} handleInputChange={handleInput} TypesMetodoPagamento={TypesMetodoPagamento} />}
+                {showFormMetodoPagamento && <FormMetodoPagamento value={carteira} submit={submit} handleCheckbox={handleCheckox} handleSelect={handleSelect} handleInputChange={handleInput} TypesMetodoPagamento={TypesMetodoPagamento} />}
 
                 <main>
 

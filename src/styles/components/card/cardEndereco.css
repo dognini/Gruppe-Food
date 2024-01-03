@@ -11,6 +11,7 @@
 
 .card_endereco.favorito {
     border: 1px solid orange;
+    box-shadow: orange 0px 4px 8px -2px, orange 0px 0px 0px 1px;
 }
 
 .card_endereco span {

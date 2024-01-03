@@ -126,14 +126,14 @@
       "pedidos": [],
       "carteira": [
         {
-          "id": "a0ffd93e-f959-4a2a-9fb9-cd857213fed1",
+          "id": "65a0c44d-df5b-4608-9afa-7c7e8eebf13c",
           "favorito": false,
           "typeCard": "Cartão de Crédito",
-          "numero": "454545",
-          "validade": "4545",
-          "cvv": "785",
-          "titular": "DIOGO",
-          "cpf": "115667387926",
+          "numero": "123456789",
+          "validade": "2027-11",
+          "cvv": "575",
+          "titular": "DIOGO CORREA",
+          "cpf": "115.673.879-26",
           "apelido": "Crédito Inter"
         }
       ],

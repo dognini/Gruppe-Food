@@ -4,10 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Home from "./pages/home";
 import Login from "./pages/login";
-import Carteira from "./pages/carteira";
 import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
 import MeusPedidos from "./pages/meusPedidos";
+
+import Carteira from "./pages/carteira/carteira";
+import EditCarteira from "./pages/carteira/editCarteira";
 
 import Enderecos from "./pages/endereco/enderecos";
 import Endereco from "./pages/endereco/endereco";
@@ -35,8 +37,10 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/carrinho" element={<Carrinho />} />
 
-          <Route path="/carteira" element={<Carteira />} />
           <Route path="/meus-pedidos" element={<MeusPedidos />} />
+
+          <Route path="/carteira" element={<Carteira />} />
+          <Route path="/carteira/:id" element={<EditCarteira />} />
 
           <Route path="/enderecos" element={<Enderecos />} />
           <Route path="/endereco/:id" element={<Endereco />} />

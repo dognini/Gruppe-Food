@@ -1,0 +1,26 @@
+.main_edit_carteira {
+    margin-left: 5em;
+}
+
+.main_edit_carteira header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 93%;
+}
+
+.main_edit_carteira header h2 {
+    font-size: 2em;
+}
+
+.main_edit_carteira main {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    width: 93%;
+    margin-top: 1em;
+}
+
+.main_edit_carteira main p span {
+    font-weight: bold;
+}

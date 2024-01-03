@@ -7,6 +7,11 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
+.card_forma_de_pagamento.favorito {
+    border: 1px solid orange;
+    box-shadow: orange 0px 4px 8px -2px, orange 0px 0px 0px 1px;
+}
+
 .card_forma_de_pagamento div {
     margin-top: 1.5em;
 }

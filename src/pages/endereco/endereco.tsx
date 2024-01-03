@@ -120,7 +120,7 @@ export default function Endereco() {
             api.patch(`/usuarios/${user.id}`, updatedUser)
                 .then((res) => {
                     setShowForm(prevState => !prevState)
-                    toast.success("Usuário cadastrado com sucesso!!")
+                    toast.success("Endereço atualizado com sucesso!!")
                     localStorage.setItem('usuario', JSON.stringify(updatedUser))
 
                     const endereco = res.data.enderecos.find((item: EnderecosUsersProps) => item.id === id)
@@ -149,7 +149,7 @@ export default function Endereco() {
 
             <main className="main_endereco">
                 <header>
-                    <h2> Endereço: </h2>
+                    <h2> ENDEREÇO: </h2>
 
                     <Button onclick={toggleForm}> {!showForm ? "Editar Endereço" : "Fechar Endereço"} </Button>
                 </header>

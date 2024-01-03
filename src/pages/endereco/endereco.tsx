@@ -2,6 +2,7 @@ import "../../styles/pages/endereco/endereco.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../api/api";
 import Header from "../../layout/header/header";
@@ -9,7 +10,6 @@ import Button from "../../components/form/button";
 import SelectProps from "../../interfaces/selectProps";
 import FormEndereco from "../../components/form/formEndereco";
 import UsersProps, { EnderecosUsersProps } from "../../interfaces/usersProps";
-import { ToastContainer, toast } from "react-toastify";
 
 export default function Endereco() {
     const { id } = useParams();
@@ -73,12 +73,32 @@ export default function Endereco() {
 
 
     const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const checked = e.target.checked
+        const checked = e.target.checked;
+
+        if (checked) {
+            const updateEnderecos = user?.enderecos.map((endereco) => {
+
+                if (endereco.id !== dados.id) {
+                    return { ...endereco, favorito: false }
+                }
+
+                return endereco;
+            }) || [];
+
+
+            setUser((prevState) => {
+                if (prevState) {
+                    return { ...prevState, enderecos: updateEnderecos }
+                }
+
+                return prevState;
+            });
+        }
 
         setDados((prevState) => ({
             ...prevState,
             favorito: checked
-        }))
+        }));
     }
 
 
@@ -97,7 +117,7 @@ export default function Endereco() {
 
             const updatedUser = { ...user, enderecos: updateEnderecos }
 
-            api.patch(`/usuarios/${user.id}`, updateEnderecos)
+            api.patch(`/usuarios/${user.id}`, updatedUser)
                 .then((res) => {
                     setShowForm(prevState => !prevState)
                     toast.success("Usuário cadastrado com sucesso!!")

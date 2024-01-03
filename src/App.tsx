@@ -9,18 +9,19 @@ import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
 import MeusPedidos from "./pages/meusPedidos";
 
+import Enderecos from "./pages/endereco/enderecos";
+import Endereco from "./pages/endereco/endereco";
+
 import UserList from "./pages/user/userList";
-import CreateUser from "./pages/user/createUser";
-
 import EditUSer from "./pages/user/editUser";
-import Restaurant from "./pages/restaurant/restaurant";
+import CreateUser from "./pages/user/createUser";
 import VizualizarUser from "./pages/user/vizualizarUser";
-import EditRestaurant from "./pages/restaurant/editRestaurant";
-import CreateRestaurant from "./pages/restaurant/createRestaurant";
-import RestaurantesList from "./pages/restaurant/restaurantList";
-import ViewRestaurant from "./pages/restaurant/viewRestaurant";
-import Enderecos from "./pages/enderecos";
 
+import Restaurant from "./pages/restaurant/restaurant";
+import EditRestaurant from "./pages/restaurant/editRestaurant";
+import ViewRestaurant from "./pages/restaurant/viewRestaurant";
+import RestaurantesList from "./pages/restaurant/restaurantList";
+import CreateRestaurant from "./pages/restaurant/createRestaurant";
 
 export default function App() {
   return (
@@ -35,8 +36,10 @@ export default function App() {
           <Route path="/carrinho" element={<Carrinho />} />
 
           <Route path="/carteira" element={<Carteira />} />
-          <Route path="/enderecos" element={<Enderecos />} />
           <Route path="/meus-pedidos" element={<MeusPedidos />} />
+
+          <Route path="/enderecos" element={<Enderecos />} />
+          <Route path="/endereco/:id" element={<Endereco />} />
 
           <Route path="/usuarios" element={<UserList />} />
           <Route path="/create-user" element={<CreateUser />} />

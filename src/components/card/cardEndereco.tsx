@@ -1,5 +1,6 @@
 import "../../styles/components/card/cardEndereco.css";
 
+import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { RiCupFill } from "react-icons/ri";
 import { EnderecosUsersProps } from "../../interfaces/usersProps";
@@ -9,10 +10,12 @@ interface CardEnderecoProps {
 }
 
 const CardEndereco = ({ dados }: CardEnderecoProps) => {
+    const cardClass = `card_endereco ${dados.favorito ? 'favorito' : ''}`
+
     return (
-        <div className="card_endereco">
+        <Link to={`/endereco/${dados.id}`} className={cardClass}>
             <span>
-                {dados.TypeEndereco === 'Casa' ? <IoHome/> : <RiCupFill/>}
+                {dados.TypeEndereco === 'Casa' ? <IoHome /> : <RiCupFill />}
             </span>
 
             <ul className="card_endereco_list">
@@ -22,7 +25,8 @@ const CardEndereco = ({ dados }: CardEnderecoProps) => {
                 <li> <p> {dados.cidade}/{dados.estado} </p> </li>
                 <li> <p> {dados.complemento} </p> </li>
             </ul>
-        </div>
+
+        </Link>
     )
 }
 

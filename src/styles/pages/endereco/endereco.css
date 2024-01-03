@@ -1,0 +1,24 @@
+.main_endereco {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5em;
+}
+
+.main_endereco header {
+    display: flex;
+    justify-content: space-between;
+    width: 93%;
+    margin-bottom: 1em;
+}
+
+.main_endereco header h2 {
+    font-size: 2em;
+}
+
+.main_endereco main p {
+    margin-bottom: 6px;
+}
+
+.main_endereco main p span {
+    font-weight: bold;
+}

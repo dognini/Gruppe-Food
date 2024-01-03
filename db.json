@@ -117,6 +117,30 @@
       "enderecos": []
     },
     {
+      "0": {
+        "id": "0ca66b7d-24fb-4d65-a97b-58523626ff15",
+        "cep": "88311-256",
+        "estado": "SC",
+        "cidade": "Itajaí",
+        "bairro": "Cordeiros",
+        "rua": "Rua Gercino José Corrêa",
+        "numero": "545",
+        "complemento": "casa",
+        "TypeEndereco": "Casa",
+        "favorito": true
+      },
+      "1": {
+        "id": "f9b43e00-0aa9-4553-8141-092bd3a7c324",
+        "cep": "88304-401",
+        "estado": "SC",
+        "cidade": "Itajaí",
+        "bairro": "São João",
+        "rua": "Rua José Pereira Liberato",
+        "numero": "1475",
+        "complemento": "Sala 202",
+        "TypeEndereco": "Trabalho",
+        "favorito": false
+      },
       "id": 6,
       "nome": "Diogo Dognini Corrêa",
       "telefone": "(47) 9924-04919",
@@ -139,24 +163,24 @@
       ],
       "enderecos": [
         {
-          "id": "a22638bc-4e0b-41c4-a4b6-56228de1534a",
+          "id": "0ca66b7d-24fb-4d65-a97b-58523626ff15",
           "cep": "88311-256",
           "estado": "SC",
           "cidade": "Itajaí",
           "bairro": "Cordeiros",
           "rua": "Rua Gercino José Corrêa",
           "numero": "545",
-          "complemento": "Casa",
+          "complemento": "casa",
           "TypeEndereco": "Casa",
-          "favorito": false
+          "favorito": true
         },
         {
-          "id": "af93812e-c708-4389-b599-f29cdc3aba42",
+          "id": "f9b43e00-0aa9-4553-8141-092bd3a7c324",
           "cep": "88304-401",
           "estado": "SC",
           "cidade": "Itajaí",
           "bairro": "São João",
-          "rua": "R. José Pereira Liberato",
+          "rua": "Rua José Pereira Liberato",
           "numero": "1475",
           "complemento": "Sala 202",
           "TypeEndereco": "Trabalho",

@@ -1,31 +1,23 @@
-import "../styles/pages/enderecos.css";
+/* eslint-disable react-hooks/exhaustive-deps */
+import "../../styles/pages/endereco/enderecos.css";
 
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-import api from "../api/api";
+import api from "../../api/api";
+import apiCEP from "../../api/apiCEP";
+
 import { v4 as uuidv4 } from 'uuid';
-import Header from "../layout/header/header";
-import Button from "../components/form/button";
-import CardEndereco from "../components/card/cardEndereco";
-import FormEndereco from "../components/form/formEndereco";
-import UsersProps, { EnderecosUsersProps } from "../interfaces/usersProps";
-import apiCEP from "../api/apiCEP";
+import Header from "../../layout/header/header";
+import Button from "../../components/form/button";
+import CardEndereco from "../../components/card/cardEndereco";
+import FormEndereco from "../../components/form/formEndereco";
+import UsersProps, { EnderecosUsersProps } from "../../interfaces/usersProps";
 
 export default function Enderecos() {
+    const [user, setUser] = useState<UsersProps>();
     const [typesEnderecos, setTypesEnderecos] = useState([]);
     const [showFormEndereco, setShowFormEndereco] = useState<boolean>(false);
-    const [user, setUser] = useState<UsersProps>({
-        id: 0,
-        nome: "",
-        email: "",
-        senha: "",
-        telefone: "",
-        typeUser: "",
-        pedidos: [],
-        carteira: [],
-        enderecos: []
-    });
     const [dados, setDados] = useState<EnderecosUsersProps>({
         id: uuidv4(),
         cep: "",
@@ -72,8 +64,18 @@ export default function Enderecos() {
     }
 
 
+    const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checked = e.target.checked
+
+        setDados((prevState) => ({
+            ...prevState,
+            favorito: checked
+        }))
+    }
+
+
     const buscaCEP = async () => {
-        const CEP = dados?.cep?.replace(/\D/g, "");
+        const CEP = dados.cep.replace(/\D/g, "");
 
         if (CEP.length === 8) {
 
@@ -101,12 +103,12 @@ export default function Enderecos() {
         const updateEndereco = {
             ...user,
             enderecos: [
-                ...(user.enderecos || []),
+                ...(user?.enderecos || []),
                 { ...dados },
             ],
         };
 
-        api.patch(`/usuarios/${user.id}`, updateEndereco)
+        api.patch(`/usuarios/${user?.id}`, updateEndereco)
             .then((res) => {
                 setUser(res.data)
                 setShowFormEndereco(prevState => !prevState)
@@ -140,15 +142,17 @@ export default function Enderecos() {
                 <Button onclick={togleForm} > Cadastrar </Button>
             </header>
 
-            {showFormEndereco && <main> <FormEndereco endereco={dados} submit={submit} handleOnChange={handleSelect} handleChange={handleInput} typesEnderecos={typesEnderecos} /> </main>}
+            {showFormEndereco && <main> <FormEndereco checked={dados.favorito} endereco={dados} submit={submit} handleCheckbox={handleCheckbox} handleOnChange={handleSelect} handleChange={handleInput} typesEnderecos={typesEnderecos} /> </main>}
 
             <main className="enderecos_main">
 
-                {user.enderecos.length === 0 && <h2> Sem endereços cadastrados... </h2>}
+                {user?.enderecos.length === 0 && <h2> Sem endereços cadastrados... </h2>}
 
-                {user?.enderecos?.map((item) => (
-                    <CardEndereco dados={item} key={item.id} />
-                ))}
+                {
+                    user?.enderecos.map((item) => (
+                        <CardEndereco dados={item} key={item.id} />
+                    ))
+                }
 
             </main>
         </section>

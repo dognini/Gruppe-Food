@@ -66,7 +66,7 @@ export default function EditUSer() {
 
         api.patch(`/usuarios/${id}`, user)
             .then(() => {
-                toast.success("Usuário cadastrado com sucesso!")
+                toast.success("Usuário atualizado com sucesso!")
             })
             .catch((error) => console.error("Erro ao cadastrar um usuário: ", error))
     }

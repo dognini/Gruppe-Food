@@ -11,6 +11,11 @@
     margin-bottom: 1em;
 }
 
+.main_endereco header div {
+    display: flex;
+    gap: 1em;
+}
+
 .main_endereco header h2 {
     font-size: 2em;
 }

@@ -1,39 +1,26 @@
-import "../../styles/pages/carteira/carteira.css";
-
-import api from "../../api/api";
+import "../../styles/pages/carteira/editCarteira.css";
 
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { v4 as uuidv4 } from 'uuid';
+import api from "../../api/api";
 import Header from "../../layout/header/header";
 import Button from "../../components/form/button";
 import UsersProps from "../../interfaces/usersProps";
 import SelectProps from "../../interfaces/selectProps";
 import CarteiraProps from "../../interfaces/carteiraProps";
-import CardCarteira from "../../components/card/cardCarteira";
-import CardTransacao from "../../components/card/cardTransacao";
 import FormMetodoPagamento from "../../components/form/formMetodoPagamento";
 
+export default function EditCarteira() {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-export default function Carteira() {
-
-    const [showFormMetodoPagamento, setShowFormMetodoPagamento] = useState(false);
-    const [TypesMetodoPagamento, setTypesMetodoPagamento] = useState<SelectProps[]>([]);
-
-    const [user, setUser] = useState<UsersProps>({
-        id: 0,
-        nome: "",
-        email: "",
-        senha: "",
-        telefone: "",
-        typeUser: "",
-        pedidos: [],
-        carteira: [],
-        enderecos: []
-    });
-    const [carteira, setCarteira] = useState<CarteiraProps>({
-        id: uuidv4(),
+    const [user, setUser] = useState<UsersProps>()
+    const [showForm, setShowForm] = useState<boolean>(false)
+    const [TypeMetodoPagamento, setTypeMetodoPagamento] = useState<SelectProps[]>([])
+    const [dados, setDados] = useState<CarteiraProps>({
+        id: "",
         favorito: false,
         typeCard: "",
         numero: "",
@@ -41,98 +28,133 @@ export default function Carteira() {
         cvv: "",
         titular: "",
         cpf: "",
-        apelido: "",
+        apelido: ""
     });
 
 
     useEffect(() => {
-        const userLocal = localStorage.getItem("usuario")
-        const parseUser = userLocal ? JSON.parse(userLocal) : null
+        const localUser = localStorage.getItem('usuario')
+        const userParse = localUser ? JSON.parse(localUser) : null
 
-        setUser(parseUser)
-    }, [])
+        setUser(userParse)
+
+        if (userParse) {
+            const carteira = userParse.carteira.find((item: CarteiraProps) => item.id === id);
+
+            if (carteira) {
+                setDados(carteira);
+            }
+        }
+    }, [id])
 
 
     useEffect(() => {
         api.get("/metodosPagamentos")
-            .then((res) => setTypesMetodoPagamento(res.data))
-            .catch((error) => console.error("Não foi possível buscar os metodos de pagamento", error))
+            .then((res) => setTypeMetodoPagamento(res.data))
+            .catch((error) => console.error("Ocorreu um erro ao buscar os meios de pagamentos", error))
     }, [])
-
-
-    const ShowFormMetodoPagamento = () => {
-        setShowFormMetodoPagamento(prevState => !prevState)
-    }
 
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
         const { value } = event.target;
 
-        setCarteira((prevState) => ({ ...prevState, [fieldName]: value }));
+        setDados((prevState) => ({ ...prevState, [fieldName]: value }));
     }
 
 
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectTypePagamento = event.target.value;
+        const selectCard = event.target.value;
 
-        setCarteira((prevState) => ({
+        setDados((prevState) => ({
             ...prevState,
-            typeCard: selectTypePagamento
+            typeCard: selectCard
         }))
     }
 
 
-    const handleCheckox = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const checked = event.target.checked;
+    const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checked = e.target.checked;
 
         if (checked) {
-            const updateCarteira = user.carteira.map((endereco) => {
+            const updateEnderecos = user?.carteira.map((endereco) => {
 
-                if (endereco.id !== carteira.id) {
+                if (endereco.id !== dados.id) {
                     return { ...endereco, favorito: false }
                 }
 
                 return endereco;
             }) || [];
 
+
             setUser((prevState) => {
                 if (prevState) {
-                    return { ...prevState, carteira: updateCarteira }
+                    return { ...prevState, carteira: updateEnderecos }
                 }
 
-                return prevState
-            })
+                return prevState;
+            });
         }
 
-        setCarteira((prevState) => ({
+        setDados((prevState) => ({
             ...prevState,
             favorito: checked
-        }))
+        }));
+    }
+
+
+    const deletar = (idCartao: string) => {
+        const cartoes = user?.carteira.filter((item: CarteiraProps) => item.id !== idCartao);
+
+        api.patch(`/usuarios/${user?.id}`, { carteira: cartoes })
+            .then((res) => {
+                toast.success("Cartão deletado com sucesso!!")
+                localStorage.setItem('usuario', JSON.stringify(res.data))
+
+                setTimeout(() => {
+                    navigate('/carteira')
+                }, 2000)
+            })
+            .catch((error) => {
+                console.error("Ocorreu um erro ao deletar o cartão", error)
+                toast.error("Ocorreu um erro ao deletar o cartão, tente novamente mais tarde")
+            })
     }
 
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const updateCarteira = {
-            ...user,
-            carteira: [
-                ...(user.carteira || []),
-                { ...carteira },
-            ],
-        };
+        if (user) {
+            const updateCarteira = user.carteira.map((carteira) => {
 
-        api.patch(`/usuarios/${user?.id}`, updateCarteira)
-            .then((res) => {
-                setUser(res.data)
-                toast.success("Cartão cadastrado com sucesso!!")
-                setShowFormMetodoPagamento(prevState => !prevState)
-                localStorage.setItem('usuario', JSON.stringify(res.data))
+                if (carteira.id === id) {
+                    return { ...carteira, ...dados }
+                }
+
+                return carteira;
             })
-            .catch((error) => {
-                console.error("Não foi possível cadastrar o cartão", error)
-                toast.error("Não foi possível cadastrar o cartão, tente novamente mais tarde")
-            })
+
+            const updateUser = { ...user, carteira: updateCarteira }
+
+            api.patch(`/usuarios/${user.id}`, updateUser)
+                .then((res) => {
+                    setShowForm(prevState => !prevState)
+                    toast.success("Carteira atualizado com sucesso!!")
+                    localStorage.setItem('usuario', JSON.stringify(res.data))
+
+                    const carteira = res.data.carteira.find((item: CarteiraProps) => item.id === id)
+                    setDados(carteira)
+                })
+                .catch((error) => {
+                    console.error("Ocorreu um erro ao atualizar carteira", error);
+                    toast.error("Ocorreu um erro ao atualizar carteira, tente novamente mais tarde");
+                })
+        }
+    }
+
+
+    const toggleForm = () => {
+        setShowForm(prevState => !prevState);
     }
 
 
@@ -141,39 +163,36 @@ export default function Carteira() {
             <ToastContainer />
 
             <header>
-                <Header titulo="Carteira" to="/" />
+                <Header titulo={dados.apelido} to="/carteira" />
             </header>
 
-            <section className="section_formas_de_pagamento">
+            <main className="main_edit_carteira">
                 <header>
-                    <h2> Formas de Pagamento: </h2>
-                    <Button onclick={ShowFormMetodoPagamento} > Cadastrar </Button>
+                    <h2> CARTEIRA </h2>
+
+                    <div>
+                        <Button onclick={toggleForm}> {!showForm ? "Editar" : "Fechar"} </Button>
+                        <Button onclick={() => deletar(dados.id)}> Excluir </Button>
+                    </div>
                 </header>
 
-                {showFormMetodoPagamento && <FormMetodoPagamento value={carteira} submit={submit} handleCheckbox={handleCheckox} handleSelect={handleSelect} handleInputChange={handleInput} TypesMetodoPagamento={TypesMetodoPagamento} />}
+                {!showForm ? (
+                    <main>
+                        <p> <span> Tipo de Cartão: </span> {dados.typeCard} </p>
+                        <p> <span> Número: </span> {dados.numero} </p>
+                        <p> <span> Validade: </span> {dados.validade} </p>
+                        <p> <span> CVV: </span> {dados.cvv} </p>
+                        <p> <span> Titular: </span> {dados.titular} </p>
+                        <p> <span> CPF: </span> {dados.cpf} </p>
+                        <p> <span> Apelido: </span> {dados.apelido} </p>
+                    </main>
+                ) : (
+                    <main>
+                        <FormMetodoPagamento TypesMetodoPagamento={TypeMetodoPagamento} value={dados} handleCheckbox={handleCheckbox} handleInputChange={handleInput} handleSelect={handleSelect} submit={submit} />
+                    </main>
+                )}
 
-                <main>
-
-                    {user?.carteira.map((item) => (
-                        <CardCarteira
-                            key={item.apelido}
-                            item={item}
-                        />
-                    ))}
-
-                </main>
-            </section>
-
-            <section className="section_historico_de_transacao">
-                <header>
-                    <h2> Histórico de Transação: </h2>
-                </header>
-
-                <main>
-                    <CardTransacao />
-                </main>
-            </section>
-
+            </main>
         </section>
     )
 }

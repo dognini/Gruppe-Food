@@ -9,6 +9,11 @@
     width: 93%;
 }
 
+.main_edit_carteira header div {
+    display: flex;
+    gap: 1em;
+}
+
 .main_edit_carteira header h2 {
     font-size: 2em;
 }

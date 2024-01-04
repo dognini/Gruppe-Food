@@ -1,8 +1,8 @@
 import "../../styles/pages/endereco/endereco.css";
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
 import api from "../../api/api";
 import Header from "../../layout/header/header";
@@ -13,6 +13,7 @@ import UsersProps, { EnderecosUsersProps } from "../../interfaces/usersProps";
 
 export default function Endereco() {
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [user, setUser] = useState<UsersProps>()
     const [showForm, setShowForm] = useState<boolean>(false)
@@ -102,6 +103,25 @@ export default function Endereco() {
     }
 
 
+    const deletar = (idCartao: string) => {
+        const enderecos = user?.enderecos.filter((item: EnderecosUsersProps) => item.id !== idCartao);
+
+        api.patch(`/usuarios/${user?.id}`, { enderecos: enderecos })
+            .then((res) => {
+                toast.success("Endereço deletado com sucesso!!")
+                localStorage.setItem('usuario', JSON.stringify(res.data))
+
+                setTimeout(() => {
+                    navigate('/enderecos')
+                }, 2000)
+            })
+            .catch((error) => {
+                console.error("Ocorreu um erro ao deletar o endereço", error)
+                toast.error("Ocorreu um erro ao deletar o endereço, tente novamente mais tarde")
+            })
+    }
+
+
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -151,7 +171,10 @@ export default function Endereco() {
                 <header>
                     <h2> ENDEREÇO: </h2>
 
-                    <Button onclick={toggleForm}> {!showForm ? "Editar Endereço" : "Fechar Endereço"} </Button>
+                    <div>
+                        <Button onclick={toggleForm}> {!showForm ? "Editar" : "Fechar"} </Button>
+                        <Button onclick={() => deletar(dados.id)}> Excluir </Button>
+                    </div>
                 </header>
 
                 {!showForm ? (

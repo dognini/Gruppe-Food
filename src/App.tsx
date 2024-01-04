@@ -8,8 +8,8 @@ import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
 import MeusPedidos from "./pages/meusPedidos";
 
-import Carteira from "./pages/carteira/carteira";
-import EditCarteira from "./pages/carteira/editCarteira";
+import Carteira from "./pages/carteira/carteiras";
+import EditCarteira from "./pages/carteira/carteira";
 
 import Enderecos from "./pages/endereco/enderecos";
 import Endereco from "./pages/endereco/endereco";

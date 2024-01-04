@@ -28,7 +28,7 @@ export default function Enderecos() {
         numero: "",
         complemento: "",
         TypeEndereco: "",
-        favorito: false
+        favorito: true
     });
 
 

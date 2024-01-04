@@ -34,7 +34,7 @@ export default function Carteira() {
     });
     const [carteira, setCarteira] = useState<CarteiraProps>({
         id: uuidv4(),
-        favorito: false,
+        favorito: true,
         typeCard: "",
         numero: "",
         validade: "",

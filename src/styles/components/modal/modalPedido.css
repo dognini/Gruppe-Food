@@ -11,8 +11,16 @@
 }
 
 .modalPedido-content {
-    width: 15%;
-    max-width: 20em;
+    width: 40%;
+    padding: 1em;
     border-radius: 5px;
-    background-color: #ffac06;
+    background-color: lightgray;
+}
+
+.section_modal_pedido {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    flex-wrap: wrap;
 }

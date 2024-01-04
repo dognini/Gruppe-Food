@@ -4,19 +4,24 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import Button from "../components/form/button";
+import UsersProps from "../interfaces/usersProps";
 import ModalPedido from "../components/modal/modalPedido";
 import CardCarrinho from "../components/card/cardCarrinho";
 import { PratosProps } from "../interfaces/restaurantesProps";
 
-
 export default function Carrinho() {
-    const [pedidos, setPedidos] = useState<PratosProps[]>([]);
+    const [user, setUser] = useState<UsersProps>()
+    const [pedidos, setPedidos] = useState<PratosProps[]>([])
     const [showModalPedidos, setShowModalPedidos] = useState(false)
 
     useEffect(() => {
-        const localCarrinho = localStorage.getItem('carrinho');
-        const parseCarrinho = localCarrinho ? JSON.parse(localCarrinho) : null;
+        const localCarrinho = localStorage.getItem('carrinho')
+        const parseCarrinho = localCarrinho ? JSON.parse(localCarrinho) : null
 
+        const localUser = localStorage.getItem('usuario')
+        const parseUser = localUser ? JSON.parse(localUser) : null
+
+        setUser(parseUser)
         setPedidos(parseCarrinho)
     }, []);
 
@@ -77,6 +82,8 @@ export default function Carrinho() {
         setShowModalPedidos(false)
     }
 
+    const carteiraFavorita = user?.carteira.filter((carteira) => carteira.favorito === true)
+    const enderecoFavorito = user?.enderecos.filter((endereco) => endereco.favorito === true)
 
     return (
         <section className="container">
@@ -109,7 +116,7 @@ export default function Carrinho() {
 
             </div>
 
-            {showModalPedidos && <ModalPedido closeModal={fecharModal} showModal={true} />}
+            {showModalPedidos && <ModalPedido carteira={carteiraFavorita} endereco={enderecoFavorito} closeModal={fecharModal} showModal={true} />}
         </section>
     )
 }

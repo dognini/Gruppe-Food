@@ -126,28 +126,28 @@
       "pedidos": [],
       "carteira": [
         {
-          "id": "bdcea2b0-0c53-411d-ae46-9868cb59cd4a",
+          "id": "e0e4917b-91d8-43cd-aa42-32dde5f5c36d",
           "favorito": true,
-          "typeCard": "Cartão de Débito",
-          "numero": "987654321",
-          "validade": "2028-11",
-          "cvv": "753",
-          "titular": "DIOGO DOGNINI",
+          "typeCard": "Cartão de Crédito",
+          "numero": "123456789",
+          "validade": "2027-06",
+          "cvv": "862",
+          "titular": "DIOGO CORREA",
           "cpf": "115.673.879-26",
-          "apelido": "Débito Inter"
+          "apelido": "Crédito Inter"
         }
       ],
       "enderecos": [
         {
-          "id": "bf6f1f29-4fef-4fa7-80ae-9661fe794c8e",
-          "cep": "88304-401",
+          "id": "399cf087-88df-4de9-bb66-6acee269a929",
+          "cep": "88311-256",
           "estado": "SC",
           "cidade": "Itajaí",
-          "bairro": "São João",
-          "rua": "Rua José Pereira Liberato",
-          "numero": "1475",
-          "complemento": "Sala 202",
-          "TypeEndereco": "Trabalho",
+          "bairro": "Cordeiros",
+          "rua": "Rua Gercino José Corrêa",
+          "numero": "545",
+          "complemento": "casa",
+          "TypeEndereco": "Casa",
           "favorito": true
         }
       ]

@@ -12,10 +12,10 @@ const CardCarteira = ({ item }: CardCarteiraProps) => {
 
     return (
         <Link to={`/carteira/${item?.id}`} className={cardClass}>
-            <h1> {item?.typeCard} </h1>
+            <span> {item?.typeCard} </span>
 
             <div>
-                <h1> Pagamento: </h1>
+                <span> Pagamento: </span>
                 <p> {item?.apelido} </p>
             </div>
         </Link>

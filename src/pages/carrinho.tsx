@@ -1,8 +1,11 @@
 import "../styles/pages/carrinho.css";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
+import api from "../api/api";
+import { v4 as uuidv4 } from 'uuid';
 import Button from "../components/form/button";
 import UsersProps from "../interfaces/usersProps";
 import ModalPedido from "../components/modal/modalPedido";
@@ -10,9 +13,13 @@ import CardCarrinho from "../components/card/cardCarrinho";
 import { PratosProps } from "../interfaces/restaurantesProps";
 
 export default function Carrinho() {
+    const navigate = useNavigate();
+
     const [user, setUser] = useState<UsersProps>()
     const [pedidos, setPedidos] = useState<PratosProps[]>([])
-    const [showModalPedidos, setShowModalPedidos] = useState(false)
+    const [compraRealizada, setCompraRealizada] = useState<boolean>(false)
+    const [showModalPedidos, setShowModalPedidos] = useState<boolean>(false)
+
 
     useEffect(() => {
         const localCarrinho = localStorage.getItem('carrinho')
@@ -26,9 +33,28 @@ export default function Carrinho() {
     }, []);
 
 
+    useEffect(() => {
+
+        if (compraRealizada) {
+            navigate('/meus-pedidos')
+        }
+
+    }, [compraRealizada, navigate]);
+
+
+    const toggleModal = () => {
+        setShowModalPedidos(prevState => !prevState)
+    }
+
+
+    const fecharModal = () => {
+        setShowModalPedidos(false)
+    }
+
+
     const calcularPrecoTotal = () => {
 
-        if (pedidos.length > 0) {
+        if (pedidos && pedidos.length > 0) {
 
             const precoTotal = pedidos.reduce((total, prato) => {
                 const precoNumero = parseFloat(prato.preco);
@@ -44,14 +70,15 @@ export default function Carrinho() {
 
 
     const handleRemove = (index: number) => {
+
         const updatePedidos = [...pedidos]
         updatePedidos.splice(index, 1);
 
         setPedidos(updatePedidos)
 
         try {
-            localStorage.setItem("carrinho", JSON.stringify(updatePedidos))
             toast.success("Prato deletado com sucesso!")
+            localStorage.setItem("carrinho", JSON.stringify(updatePedidos))
         } catch (error) {
             console.error("Não foi possível deletar o prato", error)
             toast.error("Não foi possível deletar o prato, tente novamente mais tarde")
@@ -74,16 +101,41 @@ export default function Carrinho() {
     }
 
 
-    const toggleModal = () => {
-        setShowModalPedidos(prevState => !prevState)
-    }
+    const handleComprar = useCallback(() => {
 
-    const fecharModal = () => {
-        setShowModalPedidos(false)
-    }
+        if (user && pedidos.length > 0) {
+            const dataCompra = new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
+            const novoPedido = {
+                id: uuidv4(),
+                data: dataCompra,
+                restaurante: pedidos[0]?.restaurante,
+                status: "Fazendo",
+                pratos: pedidos
+            }
+
+            const novosPedidos = [...user.pedidos, novoPedido]
+
+            api.patch(`/usuarios/${user.id}`, { pedidos: novosPedidos })
+                .then((res) => {
+                    setPedidos([])
+                    setCompraRealizada(prevState => !prevState)
+                    setShowModalPedidos(prevState => !prevState)
+                    localStorage.removeItem("carrinho")
+                    localStorage.setItem('usuario', JSON.stringify(res.data))
+                })
+                .catch((error) => {
+                    console.log("Ocorreu um erro ao finalizar a compra", error)
+                    toast.error("Ocorreu um erro ao finalizar a compra, tente novamente mais tarde")
+                })
+        }
+
+    }, [user, pedidos]);
+
 
     const carteiraFavorita = user?.carteira.filter((carteira) => carteira.favorito === true)
     const enderecoFavorito = user?.enderecos.filter((endereco) => endereco.favorito === true)
+
 
     return (
         <section className="container">
@@ -96,7 +148,7 @@ export default function Carrinho() {
                 </header>
 
                 <main>
-                    {pedidos.length > 0 ?
+                    {pedidos && pedidos.length > 0 ? (
                         pedidos?.map((item, index) => (
                             <CardCarrinho
                                 key={index}
@@ -106,7 +158,9 @@ export default function Carrinho() {
                             />
 
                         ))
-                        : <p>Sem pedidos...</p>}
+                    ) : (
+                        <p> Sem pedidos... </p>
+                    )}
                 </main>
 
                 <footer>
@@ -116,7 +170,7 @@ export default function Carrinho() {
 
             </div>
 
-            {showModalPedidos && <ModalPedido carteira={carteiraFavorita} endereco={enderecoFavorito} closeModal={fecharModal} showModal={true} />}
+            {showModalPedidos && <ModalPedido carteira={carteiraFavorita} endereco={enderecoFavorito} closeModal={fecharModal} onComprar={handleComprar} showModal={true} />}
         </section>
     )
 }

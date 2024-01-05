@@ -5,6 +5,7 @@ export interface PratosProps {
     img: string
     preco: string
     quantidade: number
+    restaurante?: string
 }
 
 export interface EnderecoRestauranteProps {

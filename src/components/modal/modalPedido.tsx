@@ -8,10 +8,11 @@ import CardCarteira from "../card/cardCarteira";
 
 ReactModal.setAppElement('#root');
 
-const ModalPedido = ({ showModal, closeModal, endereco, carteira }: ModalProps) => {
+const ModalPedido = ({ showModal, closeModal, endereco, carteira, onComprar }: ModalProps) => {
     return (
         <ReactModal isOpen={showModal} onRequestClose={closeModal} contentLabel="Teste" overlayClassName="modalPedido-overlay" className="modalPedido-content">
             <section className="section_modal_pedido">
+
                 <div>
                     <h3> Endereço: </h3>
 
@@ -34,7 +35,7 @@ const ModalPedido = ({ showModal, closeModal, endereco, carteira }: ModalProps) 
 
                 </div>
 
-                <Button> Comprar </Button>
+                <Button onclick={onComprar}> Comprar </Button>
             </section>
         </ReactModal>
     )

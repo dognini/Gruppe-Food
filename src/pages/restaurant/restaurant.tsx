@@ -15,7 +15,6 @@ import RestaurantesProps, { PratosProps } from "../../interfaces/restaurantesPro
 
 interface CarrinhoItemProps extends PratosProps {
     restaurante: string
-    dataAdicao: string
 }
 
 export default function Restaurant() {
@@ -67,7 +66,6 @@ export default function Restaurant() {
             const novoItem: CarrinhoItemProps = {
                 ...filteredDish,
                 restaurante: restaurante?.nome || '',
-                dataAdicao: new Date().toLocaleDateString("pt-BR", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
             };
 
             const novoCarrinho = pratosNoCarrinho !== null ? [...pratosNoCarrinho, novoItem] : [novoItem];

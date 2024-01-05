@@ -1,6 +1,8 @@
 .card_forma_de_pagamento {
-    width: 12%;
-    max-width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 30%;
     padding: .5em;
     border-radius: 5px;
     border: 1px solid lightgray;
@@ -12,6 +14,6 @@
     box-shadow: orange 0px 4px 8px -2px, orange 0px 0px 0px 1px;
 }
 
-.card_forma_de_pagamento div {
-    margin-top: 1.5em;
+.card_forma_de_pagamento span {
+    font-weight: bold;
 }

@@ -1,7 +1,7 @@
 import "../styles/pages/login.css";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import api from "../api/api";
@@ -70,6 +70,11 @@ export default function Login() {
 
                         <Input obrigatorio tamanho="20em" name="senha" type="password" handleChange={(e) => handleInput(e, 'senha')} label="Senha" placeholder="Digite a sua senha" />
                     </section>
+
+                    <div className="section_link" >
+                        <p> <Link to='/cadastro'> Cadastrar </Link> </p>
+                        <p> <Link to='/cadastro-restaurante'> Cadastrar Restaurante </Link> </p>
+                    </div>
 
                     <Button type="submit"> Cadastrar </Button>
                 </form>

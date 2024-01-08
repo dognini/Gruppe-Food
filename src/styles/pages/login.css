@@ -59,6 +59,23 @@
     gap: 1em;
 }
 
+.section_link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.section_link a {
+    color: white;
+    transition: .5s;
+}
+
+.section_link a:hover {
+    color: black;
+}
+
 @media screen and (min-width: 1920px) {
 
     .login-imagem {

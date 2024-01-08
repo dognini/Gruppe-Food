@@ -8,6 +8,8 @@ import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
 import MeusPedidos from "./pages/meusPedidos";
 
+import Cadastro from "./pages/cadstros/cadastro";
+
 import Carteira from "./pages/carteira/carteiras";
 import EditCarteira from "./pages/carteira/carteira";
 
@@ -31,6 +33,7 @@ export default function App() {
       <Routes>
 
         <Route path="/login" element={<Login />} />
+        <Route path="cadastro" element={<Cadastro />} />
 
         <Route path="/" element={<Container />}>
 

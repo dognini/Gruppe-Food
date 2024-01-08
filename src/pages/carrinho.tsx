@@ -1,8 +1,8 @@
 import "../styles/pages/carrinho.css";
 
-import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useCallback, useEffect, useState } from "react";
 
 import api from "../api/api";
 import { v4 as uuidv4 } from 'uuid';
@@ -31,6 +31,10 @@ export default function Carrinho() {
         setUser(parseUser)
         setPedidos(parseCarrinho)
     }, []);
+
+
+    const carteiraFavorita = user?.carteira.filter((carteira) => carteira.favorito === true)
+    const enderecoFavorito = user?.enderecos.filter((endereco) => endereco.favorito === true)
 
 
     useEffect(() => {
@@ -110,8 +114,9 @@ export default function Carrinho() {
                 id: uuidv4(),
                 data: dataCompra,
                 restaurante: pedidos[0]?.restaurante,
-                status: "Fazendo",
-                pratos: pedidos
+                status: "Em Espera",
+                pratos: pedidos,
+                metodoPagamento: carteiraFavorita
             }
 
             const novosPedidos = [...user.pedidos, novoPedido]
@@ -131,10 +136,6 @@ export default function Carrinho() {
         }
 
     }, [user, pedidos]);
-
-
-    const carteiraFavorita = user?.carteira.filter((carteira) => carteira.favorito === true)
-    const enderecoFavorito = user?.enderecos.filter((endereco) => endereco.favorito === true)
 
 
     return (

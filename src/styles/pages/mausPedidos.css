@@ -1,7 +1,6 @@
 .meus_pedidos_main {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     margin-left: 5em;
 }
 

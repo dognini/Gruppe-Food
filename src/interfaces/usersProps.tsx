@@ -1,17 +1,5 @@
+import PedidosProps from "./pedidoProps"
 import CarteiraProps from "./carteiraProps"
-import RestaurantesProps from "./restaurantesProps"
-
-export interface PedidosProps {
-    id: string
-    img: string
-    nome: string
-    preco: string
-    descricao: string
-    quantidade: number
-    dataAdicao: string
-    restaurante: RestaurantesProps
-}
-
 export interface EnderecosUsersProps {
     id: string
     cep: string

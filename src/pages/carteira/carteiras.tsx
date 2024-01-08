@@ -154,12 +154,14 @@ export default function Carteira() {
 
                 <main>
 
-                    {user?.carteira.map((item) => (
-                        <CardCarteira
-                            key={item.apelido}
-                            item={item}
-                        />
-                    ))}
+                    {
+                        user?.carteira.map((item) => (
+                            <CardCarteira
+                                key={item.apelido}
+                                item={item}
+                            />
+                        ))
+                    }
 
                 </main>
             </section>
@@ -170,10 +172,15 @@ export default function Carteira() {
                 </header>
 
                 <main>
-                    <CardTransacao />
+
+                    {
+                        user?.pedidos.map((item => (
+                            <CardTransacao key={item.id} item={item} />
+                        )))
+                    }
+
                 </main>
             </section>
-
         </section>
     )
 }

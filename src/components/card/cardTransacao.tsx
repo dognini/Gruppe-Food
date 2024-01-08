@@ -1,16 +1,22 @@
 import "../../styles/components/card/cardListaTransacao.css";
 
-const CardTransacao = () => {
+import PedidosProps from "../../interfaces/pedidoProps";
+
+interface CardTransacaoProps {
+    item: PedidosProps
+}
+
+const CardTransacao = ({ item }: CardTransacaoProps) => {
     return (
         <div className="card_lista_transacao">
             <div className="card_lista_transacao_dados">
-                <h1> Nome do restaurante: </h1>
-                <p> Metodo de pagamento: </p>
-                <p> Dia do pedido: </p>
+                <h1> {item.restaurante} </h1>
+                <p> {item.metodoPagamento} </p>
+                <p> {item.data} </p>
             </div>
 
             <div className="card_lista_transacao_valor">
-                <p> R$ 12,00 </p>
+                <p> R$: {item.valor},00 </p>
             </div>
         </div>
     )

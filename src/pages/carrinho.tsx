@@ -112,11 +112,12 @@ export default function Carrinho() {
 
             const novoPedido = {
                 id: uuidv4(),
+                valor: calcularPrecoTotal(),
                 data: dataCompra,
                 restaurante: pedidos[0]?.restaurante,
                 status: "Em Espera",
                 pratos: pedidos,
-                metodoPagamento: carteiraFavorita
+                metodoPagamento: carteiraFavorita && carteiraFavorita[0].apelido
             }
 
             const novosPedidos = [...user.pedidos, novoPedido]
@@ -135,6 +136,7 @@ export default function Carrinho() {
                 })
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, pedidos]);
 
 

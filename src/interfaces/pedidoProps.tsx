@@ -1,4 +1,3 @@
-import CarteiraProps from "./carteiraProps"
 import { PratosProps } from "./restaurantesProps"
 
 export default interface PedidosProps {
@@ -7,5 +6,6 @@ export default interface PedidosProps {
     restaurante: string
     status: string
     pratos: PratosProps[]
-    metodoPagamento: CarteiraProps
+    metodoPagamento: string
+    valor: number
 }

@@ -240,6 +240,28 @@
           "favorito": true
         }
       ]
+    },
+    {
+      "id": 7,
+      "nome": "Douglas",
+      "email": "douglas@gruppe.com.br",
+      "telefone": "(47) 9924-04919",
+      "senha": "Diogodani2@",
+      "typeUser": "Usuário",
+      "carteira": [],
+      "enderecos": [],
+      "pedidos": []
+    },
+    {
+      "id": 8,
+      "nome": "Douglas",
+      "email": "douglas@gruppe.com.br",
+      "telefone": "(47) 9924-665875",
+      "senha": "Diogodani2@",
+      "typeUser": "Usuário",
+      "carteira": [],
+      "enderecos": [],
+      "pedidos": []
     }
   ],
   "tiposRestaurantes": [

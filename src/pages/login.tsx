@@ -73,7 +73,7 @@ export default function Login() {
 
                     <div className="section_link" >
                         <p> <Link to='/cadastro'> Cadastrar </Link> </p>
-                        <p> <Link to='/cadastro-restaurante'> Cadastrar Restaurante </Link> </p>
+                        <p> <Link to='/create-restaurant'> Cadastrar Restaurante </Link> </p>
                     </div>
 
                     <Button type="submit"> Cadastrar </Button>

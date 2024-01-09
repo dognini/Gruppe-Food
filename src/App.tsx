@@ -8,7 +8,7 @@ import Carrinho from "./pages/carrinho";
 import Container from "./layout/container";
 import MeusPedidos from "./pages/meusPedidos";
 
-import Cadastro from "./pages/cadstros/cadastro";
+import Cadastro from "./pages/cadastros/cadastro";
 
 import Carteira from "./pages/carteira/carteiras";
 import EditCarteira from "./pages/carteira/carteira";
